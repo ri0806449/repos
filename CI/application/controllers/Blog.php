@@ -1,9 +1,9 @@
 <?php
 class Blog extends CI_Controller {
-        public function _construct()
+        public function __construct()
         {
-          parent::_construct();
-          $this->load->model('blog_model');
+            parent::__construct();
+            $this->load->model('blog_model');
         }
 
 
