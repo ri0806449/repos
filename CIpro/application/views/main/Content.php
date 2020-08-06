@@ -12,8 +12,9 @@
 	<tr>
 		<td><?= $user[$key]['username'];  ?></td>
 		<td><?= $user[$key]['email'];  ?></td>
-		<td><?php 
-			if ($user[$key]['gender'] == 0) {
+		<td>
+			<?php 
+			if ($user[$key]['gender'] == 0){
 				echo "女孩紙";
 				}
 			elseif($user[$key]['gender'] == 1){
