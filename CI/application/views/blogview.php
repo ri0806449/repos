@@ -7,7 +7,14 @@
               <li><?php echo $key+1 ; ?>.  <?php echo $value ?></li>
             <?php endforeach; ?>
           </ul>
-            <?php echo $user ?>
+          <ul>
+            <?php foreach ($user as $key => $value): ?>
+            <li><?= $key+1; ?>.  
+                <?= $user[$key]["username"]; ?>：<?= $user[$key]['murmur'];  ?>
+            </li>
+          <?php endforeach; ?>
+          </ul>  
+
 
   </body>
 </html>

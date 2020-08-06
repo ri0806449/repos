@@ -13,7 +13,6 @@ class Blog extends CI_Controller {
           $data['user'] = $this->blog_model->get_user_data();
           //$query = $this->db->query('SELECT * FROM user');
           //$fields = $query->field_data();
-          //print_r($fields[0]);
 /*          foreach ($query->list_fields() as $field)
             {
                     echo $field;
