@@ -11,7 +11,7 @@ class Loginn extends CI_Controller
 	//主頁的相關資訊
 	public function index()
 	{	
-		//載入all.css
+		//載入all.csss
 		$this->load->helper('url');
 		//$data['user'] = $this->member_model->get_member_data();
 		$data['title'] = "CI實作會員系統";
