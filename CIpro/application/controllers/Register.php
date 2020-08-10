@@ -26,9 +26,10 @@ class Register extends CI_Controller
 				'rules' => 'trim|required|min_length[8]|max_length[16]|is_unique[user.username]',//驗證規則（trim會去掉前後之空白）
 				'errors' => //錯誤時應該跳出來的訊息
 				array(
-					'required' => '你帳號漏填了',
+					'required' => '你有漏喔（帳號）',
 					'is_unique' => '你帳號跟別人重複囉',
-					'min_length' => '你太短了（帳號）'
+					'min_length' => '你太短了（帳號）',
+					'max_length' => '你太長了！（帳號）'
 				)
 			),
 			array
@@ -36,6 +37,12 @@ class Register extends CI_Controller
 				'field' => 'password',
 				'label' => '密碼',
 				'rules' => 'trim|required|min_length[3]|max_length[16]',
+				'errors' => //錯誤時應該跳出來的訊息
+				array(
+					'required' => '你有漏喔（密碼）',
+					'min_length' => '你太短了（密碼）',
+					'max_length' => '你太長了！（密碼）'
+				)
 			),
 			array
 			(
@@ -44,7 +51,10 @@ class Register extends CI_Controller
 				'rules' => 'trim|required|matches[password]',
 				'errors' => 
 				array(
-					'matches' => '確認密碼與原密碼不相符'
+					'matches' => '確認密碼與原密碼不相符',
+					'required' => '你有漏喔（密碼確認）',
+					'min_length' => '你太短了（密碼確認）',
+					'max_length' => '你太長了！（密碼確認）'
 				)
 			),
 			array
@@ -54,7 +64,8 @@ class Register extends CI_Controller
 				'rules' => 'trim|required|valid_email',
 				'errors' => 
 				array(
-					'valid_email' => '無效的信箱地址'
+					'valid_email' => '無效的信箱地址',
+					'required' => '你有漏喔（信箱）'
 				)
 			),
 			array
@@ -62,6 +73,10 @@ class Register extends CI_Controller
 				'field' => 'hobby',
 				'label' => '興趣',
 				'rules' => 'trim|required',
+				'errors' => 
+				array(
+					'required' => '你有漏喔（興趣）'
+				)
 			),									
 		);
 		$this->form_validation->set_rules($config);
@@ -79,9 +94,9 @@ class Register extends CI_Controller
 		}
 
 	}
-	
+
 	//自己設定的回調函數
-	public function username_check($str)
+	public function username_check($str)//$str即寫入的值
 	{
 		if ($str == "fuck") {
 			$this->form_validation->set_message('username_check',"請有點文化素養，勿以粗口命名帳號");

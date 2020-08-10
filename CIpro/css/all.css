@@ -21,5 +21,10 @@ form.col.s6.offset-s3.login
 /*調整註冊表格*/
 form.col.s12.reg
 {
-	margin-bottom: 170px;
+	margin-bottom: 95px;
+}
+
+/*調整註冊表單提示訊息的顏色*/
+span.helper-text.reg_error{
+	color: red;
 }
