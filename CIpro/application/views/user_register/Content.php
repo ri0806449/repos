@@ -7,6 +7,7 @@
         ?>
         <fieldset>
           <legend><h4>註冊資訊</h4></legend>
+          <!--帳號輸入-->
           <div class="row">
             <div class="col s10 offset-s1">
               <div class="input-field col s12">
@@ -14,16 +15,19 @@
                 <label for="username">帳號</label>
                 <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('username'); ?></span>
               </div>
+              <!--密碼輸入-->
               <div class="input-field col s6">
                 <input id="password" type="text" class="validate" name="password" value="<?php echo set_value('password'); ?>">
                 <label for="password">密碼</label>
                 <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('password'); ?></span>
               </div>
+              <!--確認密碼輸入-->
               <div class="input-field col s6">
                 <input id="password_retype" type="text" class="validate" name="password_retype" value="<?php echo set_value('password_retype'); ?>">
                 <label for="password_retype">再輸入一次密碼</label>
                 <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('password_retype'); ?></span>
               </div>
+              <!--信箱輸入-->
               <div class="row">
                 <div class="input-field col s12">
                   <input id="email" type="text" class="validate" name="email" value="<?php echo set_value('email'); ?>">
@@ -31,6 +35,7 @@
                   <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('email'); ?></span>
                 </div>                  
               </div>
+              <!--興趣輸入-->
               <div class="row">
                 <div class="input-field col s12">
                   <textarea id="hobby" class="materialize-textarea" name="hobby" value="<?php echo set_value('hobby'); ?>"></textarea>
