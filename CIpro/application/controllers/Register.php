@@ -23,7 +23,7 @@ class Register extends CI_Controller
 			(
 				'field' => 'username',//帳號的value：（需要去）view的對應輸入input去set_values()
 				'label' => '帳號',//出現錯誤訊息時的該欄位稱呼
-				'rules' => 'trim|required|min_length[4]|max_length[16]|is_unique[user.username]',//驗證規則（trim會去掉前後之空白）
+				'rules' => 'trim|required|min_length[4]|max_length[16]|is_unique[user.username]|callback_username_check',//驗證規則（trim會去掉前後之空白），最後一個是自訂的回調函數
 				'errors' => //錯誤時應該跳出來的訊息
 				array(
 					'required' => '你有漏喔（帳號）',
@@ -80,9 +80,9 @@ class Register extends CI_Controller
 			),									
 		);
 		$this->form_validation->set_rules($config);
-		//自己設定的回調函數
-		$this->form_validation->set_rules('username','帳號','callback_username_check');
 
+
+		
 		//表單驗證的判斷
 		if($this->form_validation->run() == FALSE){
 			$this->load->view('main/header', $data);
