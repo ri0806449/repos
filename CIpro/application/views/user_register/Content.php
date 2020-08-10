@@ -1,47 +1,41 @@
-<body>
-    <div class="container">
-      <div class="row">
-
-      <!--使用者登入填寫欄位-->
-        <form class="col s6 offset-s3 login">
+  <body>
+    <div class="row">
+      <form class="col s12 reg">
+        <fieldset>
+          <legend><h4>註冊資訊</h4></legend>
           <div class="row">
-            <h4>登入資訊</h4>
+            <div class="col s10 offset-s1">
               <div class="input-field col s12">
-                <input id="username" type="text" class="validate" autofocus required>
+                <input id="username" type="text" class="validate">
                 <label for="username">帳號</label>
               </div>
-            </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate" required>
-              <label for="password">密碼</label>
-            </div>
-          </div>
-          <button class="btn waves-effect waves-light btn-large" type="submit" name="action">登入
-            <i class="material-icons right">send</i>
-          </button>
-          <br>
-          <p style="text-align:left;">新使用者？ <a href="register.php">請註冊</a></p>
-        </form>
-
-        <!--管理者登入填寫欄位-->
-        <form class="col s3 offset-s11 login">
-          <div class="row">
-            <h6>管理者登入資訊</h6>
-              <div class="input-field col">
-                <input id="admin_username" type="text" class="validate" required>
-                <label for="admin_username">帳號</label>
+              <div class="input-field col s6">
+                <input id="password" type="text" class="validate">
+                <label for="password">密碼</label>
               </div>
-            </div>
-          <div class="row">
-            <div class="input-field col">
-              <input id="admin_password" type="password" class="validate" required>
-              <label for="admin_password">密碼</label>
+              <div class="input-field col s6">
+                <input id="password_retype" type="text" class="validate">
+                <label for="password_retype">再輸入一次密碼</label>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="email" type="text" class="validate">
+                  <label for="email">信箱</label>
+                </div>                  
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="hobby" class="materialize-textarea"></textarea>
+                  <label for="hobby">興趣</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 offset-s4">
+                 <a class="waves-effect waves-light btn-large"><i class="material-icons right">check</i>送出</a>
+                </div>
+              </div>              
             </div>
           </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action">登入
-            <i class="material-icons right">send</i>
-          </button>
-        </form>
-      </div>
+        </fieldset>
+      </form>
     </div>

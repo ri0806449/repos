@@ -1,20 +1,25 @@
 /*Materialize框架中footer的調整：確定他會在網頁的最下方（但實際上沒什麼用處，不知道是哪出問題）*/  
-  body 
+body 
   {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
   }
 
-  main 
+main 
   {
     flex: 1 0 auto;
   }
 
 
 /*調整登入資訊的margin*/
-  form.col.s6.offset-s3.login
+form.col.s6.offset-s3.login
   {
   	margin: 35px;
   }
 
+/*調整註冊表格*/
+form.col.s12.reg
+{
+	margin-bottom: 170px;
+}
