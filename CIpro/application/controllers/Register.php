@@ -21,14 +21,14 @@ class Register extends CI_Controller
 		(
 			array
 			(
-				'field' => 'username',
-				'label' => '帳號',
-				'rules' => 'trim|required|min_length[8]|max_length[16]|is_unique[user.username]',
-				'errors' => 
+				'field' => 'username',//帳號的value：（需要去）view的對應輸入input去set_values()
+				'label' => '帳號',//出現錯誤訊息時的該欄位稱呼
+				'rules' => 'trim|required|min_length[8]|max_length[16]|is_unique[user.username]',//驗證規則（trim會去掉前後之空白）
+				'errors' => //錯誤時應該跳出來的訊息
 				array(
 					'required' => '你帳號漏填了',
 					'is_unique' => '你帳號跟別人重複囉',
-					'min_length' => '你太短了'
+					'min_length' => '你太短了（帳號）'
 				)
 			),
 			array
@@ -65,6 +65,9 @@ class Register extends CI_Controller
 			),									
 		);
 		$this->form_validation->set_rules($config);
+		//自己設定的回調函數
+		$this->form_validation->set_rules('username','帳號','callback_username_check');
+
 		//表單驗證的判斷
 		if($this->form_validation->run() == FALSE){
 			$this->load->view('main/header', $data);
@@ -75,6 +78,18 @@ class Register extends CI_Controller
 			$this->load->view('user_register/send_success');
 		}
 
+	}
+	
+	//自己設定的回調函數
+	public function username_check($str)
+	{
+		if ($str == "fuck") {
+			$this->form_validation->set_message('username_check',"請有點文化素養，勿以粗口命名帳號");
+			return FALSE;
+		}
+		else{
+			return TRUE;
+		}
 	}
 
 }	
