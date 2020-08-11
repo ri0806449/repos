@@ -20,7 +20,7 @@ class Loginn extends CI_Controller
 
 		//使用者登入
 		if ($this->form_validation->run('login_user') == FALSE) {
-			$this->load->view('main/header', $data);
+			$this->load->view('loginn/header', $data);
 			$this->load->view('loginn/content',$data);
 			$this->load->view('main/footer',$data);
 		}
