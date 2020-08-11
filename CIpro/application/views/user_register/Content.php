@@ -5,13 +5,22 @@
           $attributes = array('class'=>'col s12 reg');
           echo form_open('register', $attributes); 
         ?>
+       <?php
+        //echo驗證錯誤（但不確定為什麼要放在這裡，等畫面出來後再來看看）
+        echo "<div class='error_msg'>";
+        if (isset($error_message)) {
+        echo $error_message;
+        }
+        echo validation_errors();
+        echo "</div>";
+      ?>
         <fieldset>
           <legend><h4>註冊資訊</h4></legend>
           <!--帳號輸入-->
           <div class="row">
             <div class="col s10 offset-s1">
               <div class="input-field col s12">
-                <input id="username" type="text" class="validate" name="username" value="<?= set_value('username'); ?>"><!-- = 的是該欄位的name-->
+                <input id="username" type="text" class="validate" name="username" value="<?= set_value('username'); ?>"><!-- set_value= 的是該欄位的name-->
                 <label for="username">帳號</label>
                 <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('username'); ?></span>
               </div>
