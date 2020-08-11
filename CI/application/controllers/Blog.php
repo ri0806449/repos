@@ -28,7 +28,7 @@ class Blog extends CI_Controller {
 
 */
           $data['title'] = ucfirst('superb stuff');
-          $data['heading'] = "小教學一波";
+          $data['heading'] = "小教學一波"; 
           $data['to_do_list'] = array("吃飯","打東東","打東東燈燈～");
           $data['footer_title'] = 'footer一波';
           $data['footer_content'] = '小天地一波';
