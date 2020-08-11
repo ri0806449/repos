@@ -11,36 +11,36 @@
           <div class="row">
             <div class="col s10 offset-s1">
               <div class="input-field col s12">
-                <input id="username" type="text" class="validate" name="username" value="<?php echo set_value('username'); ?>">
+                <input id="username" type="text" class="validate" name="username" value="<?= set_value('username'); ?>"><!-- = 的是該欄位的name-->
                 <label for="username">帳號</label>
-                <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('username'); ?></span>
+                <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('username'); ?></span>
               </div>
               <!--密碼輸入-->
               <div class="input-field col s6">
-                <input id="password" type="text" class="validate" name="password" value="<?php echo set_value('password'); ?>">
+                <input id="password" type="text" class="validate" name="password" value="<?= set_value('password'); ?>">
                 <label for="password">密碼</label>
-                <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('password'); ?></span>
+                <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('password'); ?></span>
               </div>
               <!--確認密碼輸入-->
               <div class="input-field col s6">
-                <input id="password_retype" type="text" class="validate" name="password_retype" value="<?php echo set_value('password_retype'); ?>">
+                <input id="password_retype" type="text" class="validate" name="password_retype" value="<?= set_value('password_retype'); ?>">
                 <label for="password_retype">再輸入一次密碼</label>
-                <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('password_retype'); ?></span>
+                <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('password_retype'); ?></span>
               </div>
               <!--信箱輸入-->
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="email" type="text" class="validate" name="email" value="<?php echo set_value('email'); ?>">
+                  <input id="email" type="text" class="validate" name="email" value="<?= set_value('email'); ?>">
                   <label for="email">信箱</label>
-                  <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('email'); ?></span>
+                  <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('email'); ?></span>
                 </div>                  
               </div>
               <!--興趣輸入-->
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea id="hobby" class="materialize-textarea" name="hobby" value="<?php echo set_value('hobby'); ?>"></textarea>
+                  <textarea id="hobby" class="materialize-textarea" name="hobby" value="<?= set_value('hobby'); ?>"></textarea>
                   <label for="hobby">興趣</label>
-                  <span class="helper-text reg_error" data-error="wrong" data-success=""><?php echo form_error('hobby'); ?></span>
+                  <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('hobby'); ?></span>
                 </div>
               </div>
               <div class="row">
