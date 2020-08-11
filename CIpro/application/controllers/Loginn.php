@@ -19,7 +19,7 @@ class Loginn extends CI_Controller
 		$data['title'] = "CI實作會員系統";
 
 		//使用者登入
-		if ($this->form_validation->run('sign_up_user') == FALSE) {
+		if ($this->form_validation->run('login_user') == FALSE) {
 			$this->load->view('main/header', $data);
 			$this->load->view('loginn/content',$data);
 			$this->load->view('main/footer',$data);
@@ -33,7 +33,7 @@ class Loginn extends CI_Controller
 
 /*管理者登入晚一點在寫，一起寫太靠北了，debug不完誒靠
 		//管理者登入
-		if($this->form_validation->run('sign_up_admin') == FALSE){
+		if($this->form_validation->run('login_admin') == FALSE){
 			$this->load->view('main/header',$data);
 			$this->load->view('loginn/content',$data);
 			$this->load->view('main/footer',$data);
