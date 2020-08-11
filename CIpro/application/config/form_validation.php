@@ -62,5 +62,56 @@
 					'required' => '你有漏喔（興趣）'
 				)
 			),
-		)							
+		),
+		'sign_up_user' => array
+		(
+			array
+			(
+				'field' => 'login_user_username',
+				'label' => '使用者帳號',
+				'rules' => 'trim|required',
+				'errors' => 
+				array
+				(
+					'required' => '您貴人多忘事，忘記填帳號囉～',
+				
+				)
+			),
+			array
+			(
+				'field' => 'login_user_password',
+				'label' => '使用者密碼',
+				'rules' => 'trim|required',
+				'errors' => 
+				array
+				(
+					'required' => '您貴人多忘事，忘記填密碼囉～',
+				)
+			),
+		),
+		'sign_up_admin' => array
+		(
+			array
+			(
+				'field' => 'login_admin_username',
+				'label' => '管理者帳號',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => 
+				array
+				(
+					'required' => '您貴人多忘事，忘記填帳號囉～',
+				)
+			),
+			array
+			(
+				'field' => 'login_admin_password',
+				'label' => '管理者密碼',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => 
+				array
+				(
+					'required' => '您貴人多忘事，忘記填密碼囉～',
+				)
+			),
+		)						
 	);
