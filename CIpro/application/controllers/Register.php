@@ -33,8 +33,8 @@ class Register extends CI_Controller
 	//自己設定的回調函數
 	public function username_check($str)//$str即寫入的值
 	{
-		if ($str == "fuck") {
-			$this->form_validation->set_message('username_check',"請有點文化素養，勿以粗口命名帳號");
+		if (strpos($str,'fuck') !== false) {//用strpos判斷字串中是否包含特定文字
+			$this->form_validation->set_message('username_check',"帳號中請勿包含不雅文字");
 			return FALSE;
 		}
 		else{
