@@ -63,7 +63,7 @@
 				)
 			),
 		),
-		'sign_up_user' => array
+		'login_user' => array
 		(
 			array
 			(
@@ -89,13 +89,13 @@
 				)
 			),
 		),
-		'sign_up_admin' => array
+		'login_admin' => array
 		(
 			array
 			(
 				'field' => 'login_admin_username',
 				'label' => '管理者帳號',
-				'rules' => 'trim|required|xss_clean',
+				'rules' => 'trim|required',
 				'errors' => 
 				array
 				(
@@ -106,7 +106,7 @@
 			(
 				'field' => 'login_admin_password',
 				'label' => '管理者密碼',
-				'rules' => 'trim|required|xss_clean',
+				'rules' => 'trim|required',
 				'errors' => 
 				array
 				(
