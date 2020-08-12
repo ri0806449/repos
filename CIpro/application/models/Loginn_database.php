@@ -33,7 +33,7 @@
 			$this->db->limit(1);
 			$query = $this->db->get();
 			if($query->num_rows() == 1){
-				return $query->result();
+				return true;
 			}
 			else{
 				return false;
