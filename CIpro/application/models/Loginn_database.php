@@ -21,13 +21,12 @@
 		//用帳號密碼讀取資料
 		public function login($data)
 		{	
-
-			$condition = "username =" . "'" . $data['username'] . "' AND " . "password =" . "'" . $data['password'] . "'";
-			$this->db->select('*');
-			$this->db->from('user');
-			$this->db->where($condition);
-			$this->db->limit(1);
-			$query = $this->db->get();
+			$query = $this->db->get_where(
+											'user',array(
+															'username'=>$data['username'],
+															'password'=>$data['password']
+														),1
+										);
 			if($query->num_rows() == 1){
 				return true;
 			}
@@ -39,12 +38,7 @@
 		//讀取資料庫的資料並秀出主頁訊息
 		public function read_user_information($username)
 		{	
-			$condition = "username =" . "'" . $username . "'";
-			$this->db->select('*');
-			$this->db->from('user');
-			$this->db->where($condition);
-			$this->db->limit(1);
-			$query = $this->db->get();
+			$query = $this->db->get_where('user',array('username'=>$username),1);
 			if ($query->num_rows() == 1) {
 				return  $query->result();
 			}else{
