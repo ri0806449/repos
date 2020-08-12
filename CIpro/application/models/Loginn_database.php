@@ -6,7 +6,8 @@
 		{	
 			//query得出使用者的帳號是否在資料庫中
 
-			$query =$this->db->get_where('user',array('username'=>$data['username']),1);
+			$query =$this->db->get_where('user',
+				array('username'=>$data['username']),1);
 			if($query->num_rows() == 0){
 				//query得出資料庫裡的其他資料
 				$this->db->insert('user',$data);
@@ -21,12 +22,12 @@
 		//用帳號密碼讀取資料
 		public function login($data)
 		{	
-			$query = $this->db->get_where(
-											'user',array(
-															'username'=>$data['username'],
-															'password'=>$data['password']
-														),1
-										);
+			$query = $this->db->get_where('user',
+				//兩個中括號[]可以取代array()
+				[
+					'username' => $data['username'],
+					'password' => $data['password']
+				],1);
 			if($query->num_rows() == 1){
 				return true;
 			}
