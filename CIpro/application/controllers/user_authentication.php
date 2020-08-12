@@ -87,28 +87,24 @@ class User_Authentication extends CI_Controller
 
 	//確認使用者登入之流程
 	public function user_login_process()
-	{
-		//使用者登入
-		if ($this->form_validation->run('login_user') == FALSE){
-			//這邊真的有點難懂，為什麼驗證沒過反而是繼續檢查是否有session紀錄（有的話就載入主頁，沒有的話就重新載入登入頁面）？
-			if(isset($this->session->userdata['logged_in'])){
+	{	
+		//檢查是否有session紀錄，有的話載入主頁，沒有的話驗證帳號密碼是否有填寫（依照驗證規則config/form_validation）
+		if(isset($this->session->userdata['logged_in'])){
 				$data['user'] = $this->member_model->get_member_data();
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('main/header',$data);
 				$this->load->view('main/content',$data);
 				$this->load->view('main/footer',$data);	
 			}
-			else{
+		//使用者登入
+		if ($this->form_validation->run('login_user') == FALSE){
+				//驗證沒過（沒有填寫），重新載入登入頁面			
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
 				$this->load->view('main/footer',$data);
-
-			}
-			
-		}
-		//驗證過了的話則將使用者輸入的帳號密碼傳到model（login_database）進行處理
-		else{
+		}else{
+			//驗證過了的話則將使用者輸入的帳號密碼傳到model（login_database）進行處理
 			$data = array
 			(
 				'username' => $this->input->post('login_user_username'),
