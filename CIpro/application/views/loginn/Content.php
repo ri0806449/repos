@@ -9,13 +9,6 @@
   }
   ?>
 
-<?php
-  if (isset($message_display)) {
-  echo "<div class='message'>";
-  echo $message_display;
-  echo "</div>";
-  }
-?>
     <div class="container">
       <div class="row">
 
@@ -25,32 +18,30 @@
         echo form_open('user_authentication/user_login_process',$attributes);
       ?>
       <?php
-        //上面echo的不確定是哪來的錯誤訊息，下面echo的也不知道是哪來的提示訊息（不確定為什麼要放在這裡，等畫面出來後再來看看）      
-        if (isset($logout_message)) {
-        echo "<div class='message'>";
-        echo $logout_message;
-        echo "</div>";
+        echo "<div class='error_msg'>";
+        if (isset($error_message)) {
+        echo $error_message;
         }
-        ?>
-        <?php
-        if (isset($message_display)) {
-        echo "<div class='message'>";
-        echo $message_display;
         echo "</div>";
-        }
       ?>
           <div class="row">
             <h4>登入資訊</h4>
+                <span class="helper-text reg_error" data-error="wrong" data-success="">            
+                  <?php
+                    if (isset($message_display)) {
+                    echo $message_display;
+                    }
+                  ?>
+                </span>
               <div class="input-field col s12">
                 <input id="login_user_username" type="text" class="validate" name="login_user_username" value="<?= set_value('login_user_username') ?>" autofocus>
-                <label for="username">帳號</label>
-                <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('login_user_username'); ?></span>
+                
               </div>
             </div>
           <div class="row">
             <div class="input-field col s12">
               <input id="login_user_password" type="password" class="validate" name ="login_user_password" value="<?= set_value('login_user_password')  ?>" >
-              <label for="password">密碼</label>
+              <label for="login_user_password">密碼</label>
               <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('login_user_password'); ?></span>
             </div>
           </div>
@@ -58,7 +49,7 @@
             <i class="material-icons right">send</i>
           </button>
           <br>
-          <p style="text-align:left;">新使用者？ <a href="register">請註冊</a></p>
+          <p style="text-align:left;">新使用者？ <a href="<?= base_url() ?>index.php/user_authentication/user_register">請註冊</a></p>
         </form>
       </div>
     </div>

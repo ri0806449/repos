@@ -81,7 +81,7 @@
 			(
 				'field' => 'login_user_password',
 				'label' => '使用者密碼',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required', 
 				'errors' => 
 				array
 				(

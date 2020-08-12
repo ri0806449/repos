@@ -3,7 +3,7 @@
 <?php 
 	if(isset($this->session->userdata['logged_in']))
 	{
-		header("location:http://localhost/repos/CIpro/index.php/user_authentication/user_login_process")
+		header("<?= site_url()?>user_authentication/user_login_process");
 	}
 ?>
 <head>

@@ -3,7 +3,7 @@
       <!--把<form class="col s12 reg">換成form_open方式打開，產生 action 的時候， 是基於設定文件來產生 URL 的，這使得您的應用在更改 URL 時更具移植性-->
        <?php 
           $attributes = array('class'=>'col s12 reg');
-          echo form_open('register', $attributes); 
+          echo form_open('user_authentication/new_user_registration', $attributes); 
         ?>
        <?php
         //echo驗證錯誤（但不確定為什麼要放在這裡，等畫面出來後再來看看）
@@ -11,7 +11,6 @@
         if (isset($error_message)) {
         echo $error_message;
         }
-        echo validation_errors();
         echo "</div>";
       ?>
         <fieldset>
@@ -36,14 +35,30 @@
                 <label for="password_retype">再輸入一次密碼</label>
                 <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('password_retype'); ?></span>
               </div>
-              <!--信箱輸入-->
               <div class="row">
-                <div class="input-field col s12">
+              <!--信箱輸入-->                
+                <div class="input-field col s6">
                   <input id="email" type="text" class="validate" name="email" value="<?= set_value('email'); ?>">
                   <label for="email">信箱</label>
                   <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('email'); ?></span>
-                </div>                  
-              </div>
+                </div>
+                <!--性別輸入-->
+                <div class="input-field col s3 offset-s1">
+                  <h6>性別</h6>
+                  <p>
+                    <label>
+                      <input name="gender" type="radio" value="1" checked />
+                      <span>男</span>
+                    </label>
+                  </p>
+                  <p>
+                    <label>
+                      <input name="gender" type="radio" value='0' />
+                      <span>女</span>
+                    </label>
+                  </p>
+                </div>                    
+              </div>                
               <!--興趣輸入-->
               <div class="row">
                 <div class="input-field col s12">

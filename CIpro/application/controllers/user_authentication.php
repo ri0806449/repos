@@ -1,17 +1,17 @@
 <?php 
 //創造一個session
-session_start();
+//session_start();當已經$this->load->library('session') 這一行就幫你做好session_start的動作了
 class User_Authentication extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		//載入表單輔助函式
-		$this->load->helper('form');
+		$this->load->helper('form','url');
 		//載入表單驗證輔助函式
 		$this->load->library('form_validation');
 		//載入session輔助函式
-		//$this->load->library('session');
+		$this->load->library('session');
 		//載入資料庫model（還不確定有什麼用，要記得去看一下該model檔案）
 		$this->load->model('loginn_database');
 	}
@@ -19,11 +19,9 @@ class User_Authentication extends CI_Controller
 	//登入主頁的相關資訊
 	public function index()
 	{	
-		//載入all.css
-		$this->load->helper('url');
 		//$data['user'] = $this->member_model->get_member_data();
 		$data['title'] = "CI實作會員系統";
-		$this->load->view('main/header', $data);
+		$this->load->view('loginn/header', $data);
 		$this->load->view('loginn/content',$data);
 		$this->load->view('main/footer',$data);
 	}
@@ -32,7 +30,8 @@ class User_Authentication extends CI_Controller
 	public function user_register()
 	{	
 		//載入註冊頁面
-		$this->load->view('main/header', $data);
+		$data['title'] = "CI實作會員系統"; 
+		$this->load->view('user_register/header', $data);
 		$this->load->view('user_register/content',$data);
 		$this->load->view('main/footer',$data);
 	}
@@ -42,7 +41,8 @@ class User_Authentication extends CI_Controller
 	{
 		if($this->form_validation->run('register') == FALSE){
 			//載入註冊頁面
-			$this->load->view('main/header', $data);
+			$data['title'] = "CI實作會員系統"; 
+			$this->load->view('user_register/header', $data);
 			$this->load->view('user_register/content',$data);
 			$this->load->view('main/footer',$data);
 		}
@@ -55,19 +55,33 @@ class User_Authentication extends CI_Controller
 				'gender' => $this->input->post('gender'),
 				'hobby' => $this->input->post('hobby')
 			);
-			$result = $this->login_database->registration_insert($data);
+			$result = $this->loginn_database->registration_insert($data);
 			if($result == TRUE){
-				$data['message_display'] = '成功註冊了喔～';
-				$this->load->view('main/header', $data);
+				$data['message_display'] = '註冊成功！請輸入帳號密碼進行登入。';
+				$data['title'] = "CI實作會員系統"; 
+				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
 				$this->load->view('main/footer',$data);
 			}
 			else{
 				$data['message_display'] = '此帳號已存在';
-				$this->load->view('main/header', $data);
+				$data['title'] = "CI實作會員系統"; 
+				$this->load->view('user_register/header', $data);
 				$this->load->view('user_register/content',$data);
 				$this->load->view('main/footer',$data);
 			}
+		}
+	}
+
+	//自己設定的回調函數
+	public function username_check($str)//$str即寫入的值
+	{
+		if (strpos($str,'fuck') !== false) {//用strpos判斷字串中是否包含特定文字
+			$this->form_validation->set_message('username_check',"帳號中請勿包含不雅文字");
+			return FALSE;
+		}
+		else{
+			return TRUE;
 		}
 	}
 
@@ -79,12 +93,14 @@ class User_Authentication extends CI_Controller
 			//這邊真的有點難懂，為什麼驗證沒過反而是繼續檢查是否有session紀錄（有的話就載入主頁，沒有的話就重新載入登入頁面）？
 			if(isset($this->session->userdata['logged_in'])){
 				$data['user'] = $this->member_model->get_member_data();
+				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('main/header',$data);
 				$this->load->view('main/content',$data);
 				$this->load->view('main/footer',$data);	
 			}
 			else{
-				$this->load->view('main/header', $data);
+				$data['title'] = "CI實作會員系統"; 
+				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
 				$this->load->view('main/footer',$data);
 
@@ -98,11 +114,12 @@ class User_Authentication extends CI_Controller
 				'username' => $this->input->post('login_user_username'),
 				'password' => $this->input->post('login_user_userpassword')
 			);
-			$result = $this->login_database->login($data); 
+			$result = $this->loginn_database->login($data); 
 			if ($result == TRUE) {
 				//應該是要作為資料庫echo其他資料之依據（不確定）
+
 				$username = $this->input->post('username');
-				$result = $this->login_database->read_user_information($username);
+				$result = $this->loginn_database->read_user_information($username);
 				//為什麼還有這一層判斷啊！！！（崩潰
 				if ($result != false) {
 					$session_data = array
@@ -115,14 +132,16 @@ class User_Authentication extends CI_Controller
 				//將使用者資料納入session
 				$this->session->set_userdata('logged_in',$session_data);
 				$data['user'] = $this->member_model->get_member_data();
+				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('main/header',$data);
-				$this->load->view('main/content',$data);
+				$this->load->view('main/content',$data	);
 				$this->load->view('main/footer',$data);
 				}
 			}
 			else{
 				$data = array('error_message' => '不存在的帳號或密碼');
-				$this->load->view('main/header', $data);
+				$data['title'] = "CI實作會員系統"; 
+				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
 				$this->load->view('main/footer',$data);
 
@@ -136,7 +155,8 @@ class User_Authentication extends CI_Controller
 		$sess_array = array('username' => '');
 		$this->session->unset_userdata('logged_in',$sess_array);
 		$data['message_display'] = '成功登出';
-		$this->load->view('main/header', $data);
+		$data['title'] = "CI實作會員系統"; 
+		$this->load->view('loginn/header', $data);
 		$this->load->view('loginn/content',$data);
 		$this->load->view('main/footer',$data);
 	}
