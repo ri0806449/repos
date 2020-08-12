@@ -35,7 +35,8 @@
                 </span>
               <div class="input-field col s12">
                 <input id="login_user_username" type="text" class="validate" name="login_user_username" value="<?= set_value('login_user_username') ?>" autofocus>
-                
+                <label for="login_user_username">帳號</label>
+                <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('login_user_username'); ?></span>
               </div>
             </div>
           <div class="row">

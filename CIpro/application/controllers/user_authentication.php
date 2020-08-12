@@ -113,7 +113,6 @@ class User_Authentication extends CI_Controller
 			$result = $this->loginn_database->login($data); 
 			if ($result == TRUE) {
 				//應該是要作為資料庫echo其他資料之依據（不確定）
-
 				$username = $this->input->post('username');
 				$result = $this->loginn_database->read_user_information($username);
 				//為什麼還有這一層判斷啊！！！（崩潰
@@ -133,9 +132,8 @@ class User_Authentication extends CI_Controller
 				$this->load->view('main/content',$data	);
 				$this->load->view('main/footer',$data);
 				}
-			}
-			else{
-				$data = array('error_message' => '不存在的帳號或密碼');
+			}else{
+				$data = array('error_message' => '不存在的帳號或密碼哭一波');
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
@@ -144,6 +142,8 @@ class User_Authentication extends CI_Controller
 			}
 		}
 	}
+
+
 	//從主頁登出
 	public function logout()
 	{

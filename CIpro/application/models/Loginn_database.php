@@ -5,12 +5,8 @@
 		public function registration_insert($data)
 		{	
 			//query得出使用者的帳號是否在資料庫中
-			$condition = "username =" . "'" . $data['username'] . "'";
-			$this->db->select('*');
-			$this->db->from('user');
-			$this->db->where($condition);
-			$this->db->limit(1);
-			$query = $this->db->get();
+
+			$query =$this->db->get_where('user',array('username'=>$data['username']),1);
 			if($query->num_rows() == 0){
 				//query得出資料庫裡的其他資料
 				$this->db->insert('user',$data);
@@ -42,7 +38,7 @@
 
 		//讀取資料庫的資料並秀出主頁訊息
 		public function read_user_information($username)
-		{
+		{	
 			$condition = "username =" . "'" . $username . "'";
 			$this->db->select('*');
 			$this->db->from('user');
