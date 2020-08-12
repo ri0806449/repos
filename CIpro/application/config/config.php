@@ -432,6 +432,7 @@ $config['standardize_newlines'] = FALSE;
 |          for backwards compatibility purposes!
 |
 */
+/*自動過濾post與cookies的資料*/
 $config['global_xss_filtering'] = TRUE;
 
 /*
