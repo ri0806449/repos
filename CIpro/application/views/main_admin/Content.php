@@ -15,19 +15,19 @@
 	<tbody>
 	<?php foreach ($user as $key => $value):?>
 	<tr>
-		<td><?= $user[$key]['username'];  ?></td>
-		<td><?= $user[$key]['email'];  ?></td>
+		<td><?= $username;  ?></td>
+		<td><?= $email;  ?></td>
 		<td>
 			<?php 
-			if ($user[$key]['gender'] == 0){
+			if ($gender == 0){
 				echo "女孩紙";
 				}
-			elseif($user[$key]['gender'] == 1){
+			elseif($gender == 1){
 				echo "男孩紙";
 				}	
 			?>
 		</td>
-		<td><?= $user[$key]['hobby'];  ?></td>
+		<td><?= $hobby;  ?></td>
 	</tr>
 	<?php endforeach; ?>
 	</tbody>

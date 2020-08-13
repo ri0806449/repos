@@ -12,8 +12,8 @@ class User_Authentication extends CI_Controller
 		$this->load->library('form_validation');
 		//載入session輔助函式
 		$this->load->library('session');
-		//載入資料庫model（還不確定有什麼用，要記得去看一下該model檔案）
-		$this->load->model('loginn_database');
+		//載入資料庫model
+		$this->load->model('loginn_database','member_model');
 	}
 
 	//登入主頁的相關資訊
@@ -113,7 +113,7 @@ class User_Authentication extends CI_Controller
 			$result = $this->loginn_database->login($data); 
 			if ($result == TRUE) {
 				//應該是要作為資料庫echo其他資料之依據（不確定）
-				$username = $this->input->post('username');
+				$username = $this->input->post('login_user_username');
 				$result = $this->loginn_database->read_user_information($username);
 				//為什麼還有這一層判斷啊！！！（崩潰
 				if ($result != false) {
