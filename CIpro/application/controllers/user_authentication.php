@@ -13,7 +13,8 @@ class User_Authentication extends CI_Controller
 		//載入session輔助函式
 		$this->load->library('session');
 		//載入資料庫model
-		$this->load->model('loginn_database','member_model');
+		$this->load->model('loginn_database');
+		$this->load->model('member_model');
 	}
 
 	//登入主頁的相關資訊
@@ -95,8 +96,8 @@ class User_Authentication extends CI_Controller
 				$this->load->view('main/header',$data);
 				$this->load->view('main/content',$data);
 				$this->load->view('main/footer',$data);	
-			}
-		//使用者登入
+			}else{
+						//使用者登入
 		if ($this->form_validation->run('login_user') == FALSE){
 				//驗證沒過（沒有填寫），重新載入登入頁面			
 				$data['title'] = "CI實作會員系統"; 
@@ -104,43 +105,45 @@ class User_Authentication extends CI_Controller
 				$this->load->view('loginn/content',$data);
 				$this->load->view('main/footer',$data);
 		}else{
-			//驗證過了的話則將使用者輸入的帳號密碼傳到model（login_database）進行處理
-			$data = array
-			(
-				'username' => $this->input->post('login_user_username'),
-				'password' => $this->input->post('login_user_password')
-			);
-			$result = $this->loginn_database->login($data); 
-			if ($result == TRUE) {
-				//應該是要作為資料庫echo其他資料之依據（不確定）
-				$username = $this->input->post('login_user_username');
-				$result = $this->loginn_database->read_user_information($username);
-				//為什麼還有這一層判斷啊！！！（崩潰
-				if ($result != false) {
-					$session_data = array
+					//驗證過了的話則將使用者輸入的帳號密碼傳到model（login_database）進行處理
+					$data = array
 					(
-						'username' => $result[0]->username,
-						'email' => $result[0]->email,
-						'gender' => $result[0]->gender,
-						'hobby' => $result[0]->hobby
+						'username' => $this->input->post('login_user_username'),
+						'password' => $this->input->post('login_user_password')
 					);
-				//將使用者資料納入session
-				$this->session->set_userdata('logged_in',$session_data);
-				$data['user'] = $this->member_model->get_member_data();
-				$data['title'] = "CI實作會員系統"; 
-				$this->load->view('main/header',$data);
-				$this->load->view('main/content',$data	);
-				$this->load->view('main/footer',$data);
-				}
-			}else{
-				$data = array('error_message' => '不存在的帳號或密碼哭一波');
-				$data['title'] = "CI實作會員系統"; 
-				$this->load->view('loginn/header', $data);
-				$this->load->view('loginn/content',$data);
-				$this->load->view('main/footer',$data);
+					$result = $this->loginn_database->login($data); 
+					if ($result == TRUE) {
+						//應該是要作為資料庫echo其他資料之依據（不確定）
+						$username = $this->input->post('login_user_username');
+						$result = $this->loginn_database->read_user_information($username);
+						//為什麼還有這一層判斷啊！！！（崩潰
+						if ($result != false) {
+							$session_data = array
+							(
+								'username' => $result[0]->username,
+								'email' => $result[0]->email,
+								'gender' => $result[0]->gender,
+								'hobby' => $result[0]->hobby
+							);
+						//將使用者資料納入session
+						$this->session->set_userdata('logged_in',$session_data);
+						$data['user'] = $this->member_model->get_member_data();
+						$data['title'] = "CI實作會員系統"; 
+						$this->load->view('main/header',$data);
+						$this->load->view('main/content',$data	);
+						$this->load->view('main/footer',$data);
+						}
+					}else{
+						$data = array('error_message' => '不存在的帳號或密碼哭一波');
+						$data['title'] = "CI實作會員系統"; 
+						$this->load->view('loginn/header', $data);
+						$this->load->view('loginn/content',$data);
+						$this->load->view('main/footer',$data);
 
+					}
+				}
 			}
-		}
+
 	}
 
 
