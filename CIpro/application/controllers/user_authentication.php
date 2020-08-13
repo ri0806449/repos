@@ -112,6 +112,7 @@ class User_Authentication extends CI_Controller
 	public function user_login_process() {
 
 		if ($this->form_validation->run('login_user') == FALSE) {
+			//驗證沒過有分兩種，一種是沒有填但是本身已是登入狀態，一種是第一次進到登入頁面或帳密輸入錯誤，所以以下是這部分的判斷
 			if(isset($this->session->userdata['logged_in'])){
 				$data['user'] = $this->member_model->get_member_data();
 				$data['title'] = "CI實作會員系統"; 
@@ -125,12 +126,14 @@ class User_Authentication extends CI_Controller
 				$this->load->view('main/footer',$data);
 			}
 		} else {
+			//以下則是第一次輸入帳密或重新輸入帳密時要做出的反應
 			$data = array(
 					'username' => $this->input->post('login_user_username'),
 					'password' => $this->input->post('login_user_password')
-						);
-			$result = $this->loginn_database->login($data);
+						);//先將使用者輸入的帳密存到$data陣列中
+			$result = $this->loginn_database->login($data);//用login function確認這組帳密是否在資料庫能撈出一筆資料
 			if ($result == TRUE) {
+			//可以撈出一筆資料代表帳密正確，將username以read_user_information function去撈出該使用者的其他資料
 				$username = $this->input->post('login_user_username');
 				$result = $this->loginn_database->read_user_information($username);
 			if ($result != false) {
@@ -140,7 +143,7 @@ class User_Authentication extends CI_Controller
 									'gender' => $result[0]->gender,
 									'hobby' => $result[0]->hobby
 									);
-				// Add user data in session
+				//將撈出來的使用者相關資料存進session，並導入主頁
 				$this->session->set_userdata('logged_in', $session_data);
 				$data['user'] = $this->member_model->get_member_data();
 				$data['title'] = "CI實作會員系統"; 
@@ -149,6 +152,7 @@ class User_Authentication extends CI_Controller
 				$this->load->view('main/footer',$data);
 			}
 			} else {
+				//無法以這組帳密在資料庫撈出一筆資料，顯示錯誤畫面並導回登入頁面
 				$data = array(
 							'error_message' => 'Invalid Username or Password'
 							);
