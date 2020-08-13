@@ -40,7 +40,6 @@
 		public function read_user_information($username)
 		{	
 			$query = $this->db->get_where('user',array('username'=>$username),1);
-			var_dump($query);
 			if ($query->num_rows() == 1) {
 				return  $query->result();
 			}else{
