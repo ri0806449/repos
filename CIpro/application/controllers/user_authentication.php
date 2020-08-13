@@ -143,6 +143,7 @@ class User_Authentication extends CI_Controller
 									'gender' => $result[0]->gender,
 									'hobby' => $result[0]->hobby
 									);
+				echo($session_data['username']);
 				//將撈出來的使用者相關資料存進session，並導入主頁
 				$this->session->set_userdata('logged_in', $session_data);
 				$data['user'] = $this->member_model->get_member_data();
