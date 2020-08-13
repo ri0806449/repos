@@ -5,7 +5,7 @@
 		$username = ($this->session->userdata['logged_in']['username']);
 		$email = ($this->session->userdata['logged_in']['email']);
 		$gender = ($this->session->userdata['logged_in']['gender']);
-		$hobby = $this->session->userdata['logged_in']['hobby'];
+		$hobby = ($this->session->userdata['logged_in']['hobby']);
 	}
 	else{
 		header("location: loginn");
