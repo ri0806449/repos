@@ -108,7 +108,7 @@ class User_Authentication extends CI_Controller
 			$data = array
 			(
 				'username' => $this->input->post('login_user_username'),
-				'password' => $this->input->post('login_user_userpassword')
+				'password' => $this->input->post('login_user_password')
 			);
 			$result = $this->loginn_database->login($data); 
 			if ($result == TRUE) {
