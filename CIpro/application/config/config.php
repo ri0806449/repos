@@ -1,4 +1,5 @@
 <?php
+//確保入口皆從index.php進入
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -324,7 +325,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'mykey';
 
 /*
 |--------------------------------------------------------------------------

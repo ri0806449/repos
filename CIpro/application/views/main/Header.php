@@ -9,7 +9,15 @@
 	}
 	else{
 		header("location: loginn");
+	};
+
+	if ($this->session->userdata('logged_in')) {
+		echo "胖虎回來了";
+	}else{
+		echo "胖虎掰掰～";
 	}
+	//echo $username;
+	var_dump($hobby);
 ?>
 <head>
 	<title>	<?php echo $title  ?></title>
