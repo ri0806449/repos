@@ -86,6 +86,26 @@ class User_Authentication extends CI_Controller
 		}
 	}
 
+
+	public function test_session()
+	{
+		$newdata = [
+						'name' =>'胖虎',
+						'age'=>'17',
+						'hobby'=>'hanging out with小夫'
+					];
+		$this->session->set_userdata('pon',$newdata);
+		$test = $this->session->userdata('pon');
+		
+		if ($this->session->userdata('pon')) {
+			echo "胖虎回來了";
+		}else{
+			echo "胖虎掰掰～";
+		}
+		echo $test['hobby'];
+	}
+
+
 	//確認使用者登入之流程
 	public function user_login_process()
 	{	
