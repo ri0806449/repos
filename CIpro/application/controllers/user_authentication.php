@@ -147,10 +147,15 @@ class User_Authentication extends CI_Controller
 				//將撈出來的使用者相關資料存進session，並導入主頁
 				$this->session->set_userdata('logged_in', $session_data);
 				$data['user'] = $this->member_model->get_member_data();
-				$data['title'] = "CI實作會員系統"; 
+				$data['title'] = "CI實作會員系統";
+				echo json_encode($data);
+				exit;
+				var_dump($data);
+				exit; 
 				$this->load->view('main/header',$data);
 				$this->load->view('main/content',$data);
 				$this->load->view('main/footer',$data);
+
 			}
 			} else {
 				//無法以這組帳密在資料庫撈出一筆資料，顯示錯誤畫面並導回登入頁面

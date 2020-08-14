@@ -18,7 +18,7 @@
 	}else{
 		echo "胖虎掰掰～";
 	}
-	echo $username;
+	//echo $username;
 	var_dump($email);
 ?>
 <head>
