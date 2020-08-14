@@ -148,6 +148,8 @@ class User_Authentication extends CI_Controller
 				$this->session->set_userdata('logged_in', $session_data);
 				$data['user'] = $this->member_model->get_member_data();
 				$data['title'] = "CI實作會員系統";
+
+				//字串的整理可以做這個使用，搭配json parser online將json印出來的結果做整理就可以看得很清楚
 				echo json_encode($data);
 				exit;
 				var_dump($data);
