@@ -14,7 +14,6 @@ class User_Authentication extends CI_Controller
 		$this->load->library('session');
 		//載入資料庫model
 		$this->load->model('loginn_database');
-		$this->load->model('member_model');
 	}
 
 	//登入主頁的相關資訊
@@ -86,39 +85,27 @@ class User_Authentication extends CI_Controller
 		}
 	}
 
-	//session的小測試
-	public function test_session()
-	{
-		$newdata = [
-						'name' =>'胖虎',
-						'age'=>'17',
-						'hobby'=>'hanging out with小夫'
-					];
-		$this->session->set_userdata('pon',$newdata);
-		$test = $this->session->userdata('pon');
-		
-		if ($this->session->userdata('pon')) {
-			echo "胖虎回來了";
-		}else{
-			echo "胖虎掰掰～";
-		}
-		echo $test['hobby'];
-	}
-
-
-
-
 	// 確認使用者登入之流程
 	public function user_login_process() {
 
 		if ($this->form_validation->run('login_user') == FALSE) {
 			//驗證沒過有分兩種，一種是沒有填但是本身已是登入狀態，一種是第一次進到登入頁面或帳密輸入錯誤，所以以下是這部分的判斷
 			if(isset($this->session->userdata['logged_in'])){
-				$data['user'] = $this->member_model->get_member_data();
-				$data['title'] = "CI實作會員系統"; 
-				$this->load->view('main/header',$data);
-				$this->load->view('main/content',$data);
-				$this->load->view('main/footer',$data);
+				$username = ($this->session->userdata['logged_in']['username']);
+				$email = ($this->session->userdata['logged_in']['email']);
+				$gender = ($this->session->userdata['logged_in']['gender']);
+				$hobby = ($this->session->userdata['logged_in']['hobby']);
+				$session_data = 
+					[
+						'username' => $username,
+						'email' => $email,
+						'gender' => $gender,
+						'hobby' => $hobby	
+					];
+				$session_data['title'] = "CI實作會員系統";
+				$this->load->view('main/header',$session_data);
+				$this->load->view('main/content',$session_data);
+				$this->load->view('main/footer',$session_data);
 			}else{
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
@@ -143,21 +130,31 @@ class User_Authentication extends CI_Controller
 									'gender' => $result[0]->gender,
 									'hobby' => $result[0]->hobby
 									);
-				echo($session_data['username']);
 				//將撈出來的使用者相關資料存進session，並導入主頁
 				$this->session->set_userdata('logged_in', $session_data);
-				$data['user'] = $this->member_model->get_member_data();
-				$data['title'] = "CI實作會員系統";
-
-				//字串的整理可以做這個使用，搭配json parser online將json印出來的結果做整理就可以看得很清楚
-				echo json_encode($data);
-				exit;
-				var_dump($data);
-				exit; 
-				$this->load->view('main/header',$data);
-				$this->load->view('main/content',$data);
-				$this->load->view('main/footer',$data);
-
+				//$data['user'] = $this->member_model->get_member_data();
+				if(isset($this->session->userdata['logged_in'])){
+					$username = ($this->session->userdata['logged_in']['username']);
+					$email = ($this->session->userdata['logged_in']['email']);
+					$gender = ($this->session->userdata['logged_in']['gender']);
+					$hobby = ($this->session->userdata['logged_in']['hobby']);
+					$session_data = 
+						[
+							'username' => $username,
+							'email' => $email,
+							'gender' => $gender,
+							'hobby' => $hobby	
+						];
+					$session_data['title'] = "CI實作會員系統";
+					$this->load->view('main/header',$session_data);
+					$this->load->view('main/content',$session_data);
+					$this->load->view('main/footer',$session_data);
+				}else{
+					$data['title'] = "CI實作會員系統"; 
+					$this->load->view('loginn/header', $data);
+					$this->load->view('loginn/content',$data);
+					$this->load->view('main/footer',$data);
+				};
 			}
 			} else {
 				//無法以這組帳密在資料庫撈出一筆資料，顯示錯誤畫面並導回登入頁面
