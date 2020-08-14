@@ -4,12 +4,15 @@ body
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+   	width: 100%;
+   	min-width: 1000px
   }
 
 main 
   {
     flex: 1 0 auto;
   }
+
 
 
 /*調整登入資訊的margin*/
@@ -25,6 +28,32 @@ form.col.s12.reg
 }
 
 /*調整註冊表單提示訊息的顏色*/
-span.helper-text.reg_error{
+span.helper-text.reg_error
+{
 	color: red;
+}
+
+/*登出按鍵的顏色調整為紅色*/
+a#logout.waves-effect.waves-light.btn-large
+{
+	background-color: #e57373;
+}
+
+/*自我介紹漂浮鈕微調為藍色*/
+i.material-icons.assist
+{
+	background-color: #42a5f5;
+}
+
+
+/*自我介紹背景顏色微調為藍色*/
+div.tap-target
+{
+	background-color: #90caf9;
+}
+
+/*自我介紹按鍵微調為藍色*/
+a.wave-effect.intro
+{
+	background-color: #42a5f5;
 }
