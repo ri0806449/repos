@@ -43,18 +43,13 @@
 					<th>email</th>
 					<th>性別</th>
 					<th>興趣</th>
+					<th>編輯</th>
 				</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>
-							<?= $username;  ?>
-							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
-						</td>
-						<td>
-							<?= $email;  ?>
-							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
-						</td>
+						<td><?= $username;  ?></td>
+						<td><?= $email;  ?></td>
 						<td>
 							<?php 
 							if ($gender == 0){
@@ -64,10 +59,9 @@
 								echo "男孩";
 								}	
 							?>
-							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
 						</td>
+						<td><?= $hobby;  ?></td>
 						<td>
-							<?= $hobby;  ?>
 							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
 						</td>
 					</tr>
