@@ -46,4 +46,15 @@
 				return false;
 			}
 		}
+
+		//因為更新資料庫而需要更新session資料而需要重新取得該使用者所有資料
+		public function update_info_for_session($id)
+		{
+			$query = $this->db->get_where('user',array('id'=>$id),1);
+			if ($query->num_rows() == 1) {
+				return  $query->result();
+			}else{
+				return false;
+			}
+		}
 	}

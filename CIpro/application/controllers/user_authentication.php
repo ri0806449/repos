@@ -166,7 +166,25 @@ class User_Authentication extends CI_Controller
 
 	     //更新資料
 	     $this->member_model->update_user($id,$field,$value);
-	     //這是什麼啦
+	     //更新session資料(該使用者全部資料更新一波)
+	     $result = $this->loginn_database->update_info_for_session($id);
+			if ($result != false) {
+				//刪除session資料
+				$this->session->unset_userdata('logged_in', $session_data);
+				$session_data = [];
+				$session_data = array(
+									'id' => $result[0]->id,
+									'username' => $result[0]->username,
+									'email' => $result[0]->email,
+									'gender' => $result[0]->gender,
+									'hobby' => $result[0]->hobby
+									);
+				//將心資料再存入session中
+				$this->session->set_userdata('logged_in', $session_data);
+			}
+				
+
+	     //這是什麼啦 A：好啦跟你說，這個主要是運用在js後續判斷是否傳送成功，傳1代表成功傳送，傻傻的～
 	     echo 1;
 	     exit;
 	   }
