@@ -48,9 +48,15 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td id="user_username"><?= $username;  ?></td>
-						<td id="user_email"><?= $email;  ?></td>
-						<td id="user_gender">
+						<td>
+							<span class="edit"><?= $username;  ?></span>
+							<input type= "text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'username' id= 'nametxt_<?= $id ?>' value= '<?= $username ?>'>
+						</td>
+						<td>
+							<span class="edit"><?= $email;  ?></span>
+							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'username' id= 'nametxt_<?= $id ?>' value= '<?= $username ?>'>
+						</td>
+						<td>
 							<?php 
 							if ($gender == 0){
 								echo "女孩";
@@ -60,7 +66,7 @@
 								}	
 							?>
 						</td>
-						<td id="user_hobby"><?= $hobby;  ?></td>
+						<td><?= $hobby;  ?></td>
 						<td>
 							<button class="waves-effect waves-light btn" id="edit_user_profile">
 								<i class="material-icons left" >edit</i>編輯
