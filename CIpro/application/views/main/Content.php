@@ -53,11 +53,10 @@
 							<input type= "text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'username' id= 'nametxt_<?= $id ?>' value= '<?= $username ?>'>
 						</td>
 						<td>
-							<span class="edit"><?= $email;  ?></span>
-							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'email' id= 'emailtxt_<?= $id ?>' value= '<?= $email ?>'>
+							<span><?= $email;  ?></span>
 						</td>
 						<td>
-							<span class="edit">
+							<span>
 								<?php 
 								if ($gender == 0){
 									echo "女孩";
@@ -67,23 +66,13 @@
 									}	
 								?>
 							</span>
-							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'gender' id= 'gendertxt_<?= $id ?>' 
-							value= 
-								'<?php 
-								if ($gender == 0){
-									echo "女孩";
-									}
-								elseif($gender == 1){
-									echo "男孩";
-									}	
-								?>'>
 						</td>
 						<td>
 							<span class="edit"><?= $hobby;  ?></span>
 							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'hobby' id= 'hobbytxt_<?= $id ?>' value= '<?= $hobby ?>'>
 						</td>
 						<td>
-							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
+							<span>點擊<b>帳號</b>與<b>興趣</b>資訊即能進行編輯</span>
 						</td>
 					</tr>
 				</tbody>
