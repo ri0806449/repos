@@ -54,21 +54,34 @@
 						</td>
 						<td>
 							<span class="edit"><?= $email;  ?></span>
-							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'username' id= 'nametxt_<?= $id ?>' value= '<?= $username ?>'>
+							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'email' id= 'emailtxt_<?= $id ?>' value= '<?= $email ?>'>
 						</td>
-						<td><?= $username;  ?></td>
-						<td><?= $email;  ?></td>
 						<td>
-							<?php 
-							if ($gender == 0){
-								echo "女孩";
-								}
-							elseif($gender == 1){
-								echo "男孩";
-								}	
-							?>
+							<span class="edit">
+								<?php 
+								if ($gender == 0){
+									echo "女孩";
+									}
+								elseif($gender == 1){
+									echo "男孩";
+									}	
+								?>
+							</span>
+							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'gender' id= 'gendertxt_<?= $id ?>' 
+							value= 
+								'<?php 
+								if ($gender == 0){
+									echo "女孩";
+									}
+								elseif($gender == 1){
+									echo "男孩";
+									}	
+								?>'>
 						</td>
-						<td><?= $hobby;  ?></td>
+						<td>
+							<span class="edit"><?= $hobby;  ?></span>
+							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'hobby' id= 'hobbytxt_<?= $id ?>' value= '<?= $hobby ?>'>
+						</td>
 						<td>
 							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
 						</td>

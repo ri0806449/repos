@@ -14,6 +14,8 @@ class User_Authentication extends CI_Controller
 		$this->load->library('session');
 		//載入資料庫model
 		$this->load->model('loginn_database');
+		//載入資料庫model，取得編輯資料
+		$this->load->model('member_model');
 	}
 
 	//登入主頁的相關資訊
@@ -129,6 +131,7 @@ class User_Authentication extends CI_Controller
 				$result = $this->loginn_database->read_user_information($username);
 			if ($result != false) {
 				$session_data = array(
+									'id' => $result[0]->id,
 									'username' => $result[0]->username,
 									'email' => $result[0]->email,
 									'gender' => $result[0]->gender,
@@ -155,7 +158,18 @@ class User_Authentication extends CI_Controller
 		}
 	}
 
+	public function update_user(){
+	     // 得到使用者輸入的資料
+	     $id = $this->input->post('id');
+	     $field = $this->input->post('field');
+	     $value = $this->input->post('value');
 
+	     //更新資料
+	     $this->member_model->update_user($id,$field,$value);
+	     //這是什麼啦
+	     echo 1;
+	     exit;
+	   }
 
 
 	//從主頁登出

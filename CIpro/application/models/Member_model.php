@@ -8,4 +8,12 @@
 			$row = $query->result_array();
 			return $row;
 		}
+
+		public function update_user($id,$field,$value)
+		{
+		   //更新
+		   $data=array($field => $value);
+		   $this->db->where('id',$id);
+		   $this->db->update('user',$data);
+		}
 	}
