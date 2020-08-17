@@ -23,7 +23,7 @@ class User_Authentication extends CI_Controller
 		$data['title'] = "CI實作會員系統";
 		$this->load->view('loginn/header', $data);
 		$this->load->view('loginn/content',$data);
-		$this->load->view('main/footer',$data);
+		$this->load->view('loginn/footer',$data);
 	}
 
 	//註冊頁面的相關資訊
@@ -33,7 +33,7 @@ class User_Authentication extends CI_Controller
 		$data['title'] = "CI實作會員系統"; 
 		$this->load->view('user_register/header', $data);
 		$this->load->view('user_register/content',$data);
-		$this->load->view('main/footer',$data);
+		$this->load->view('user_register/footer',$data);
 	}
 
 	//開始要進入驗證與儲存使用者於註冊時輸入之資料至資料庫
@@ -44,7 +44,7 @@ class User_Authentication extends CI_Controller
 			$data['title'] = "CI實作會員系統"; 
 			$this->load->view('user_register/header', $data);
 			$this->load->view('user_register/content',$data);
-			$this->load->view('main/footer',$data);
+			$this->load->view('user_register/footer',$data);
 		}
 		else{
 			$data = array
@@ -61,14 +61,14 @@ class User_Authentication extends CI_Controller
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
-				$this->load->view('main/footer',$data);
+				$this->load->view('loginn/footer',$data);
 			}
 			else{
 				$data['message_display'] = '此帳號已存在';
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('user_register/header', $data);
 				$this->load->view('user_register/content',$data);
-				$this->load->view('main/footer',$data);
+				$this->load->view('user_register/footer',$data);
 			}
 		}
 	}
@@ -114,7 +114,7 @@ class User_Authentication extends CI_Controller
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
-				$this->load->view('main/footer',$data);
+				$this->load->view('loginn/footer',$data);
 			}
 		} else {
 			//以下則是第一次輸入帳密或重新輸入帳密時要做出的反應
@@ -150,7 +150,7 @@ class User_Authentication extends CI_Controller
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
 				$this->load->view('loginn/content',$data);
-				$this->load->view('main/footer',$data);
+				$this->load->view('loginn/footer',$data);
 			}
 		}
 	}
