@@ -48,9 +48,9 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><?= $username;  ?></td>
-						<td><?= $email;  ?></td>
-						<td>
+						<td id="user_username"><?= $username;  ?></td>
+						<td id="user_email"><?= $email;  ?></td>
+						<td id="user_gender">
 							<?php 
 							if ($gender == 0){
 								echo "女孩";
@@ -60,9 +60,11 @@
 								}	
 							?>
 						</td>
-						<td><?= $hobby;  ?></td>
+						<td id="user_hobby"><?= $hobby;  ?></td>
 						<td>
-							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
+							<button class="waves-effect waves-light btn" id="edit_user_profile">
+								<i class="material-icons left" >edit</i>編輯
+							</button>
 						</td>
 					</tr>
 				</tbody>
