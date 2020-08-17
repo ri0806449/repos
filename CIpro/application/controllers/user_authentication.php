@@ -169,10 +169,8 @@ class User_Authentication extends CI_Controller
 	     //更新session資料(該使用者全部資料更新一波)
 	     $result = $this->loginn_database->update_info_for_session($id);
 			if ($result != false) {
-				//刪除session資料
-				$this->session->unset_userdata('logged_in', $session_data);
-				$session_data = [];
-				$session_data = array(
+
+				$new_session_data = array(
 									'id' => $result[0]->id,
 									'username' => $result[0]->username,
 									'email' => $result[0]->email,
@@ -180,7 +178,7 @@ class User_Authentication extends CI_Controller
 									'hobby' => $result[0]->hobby
 									);
 				//將新資料再存入session中
-				$this->session->set_userdata('logged_in', $session_data);
+				$this->session->set_userdata('logged_in', $new_session_data);
 			}
 				
 
