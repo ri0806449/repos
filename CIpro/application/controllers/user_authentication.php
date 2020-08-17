@@ -179,7 +179,7 @@ class User_Authentication extends CI_Controller
 									'gender' => $result[0]->gender,
 									'hobby' => $result[0]->hobby
 									);
-				//將心資料再存入session中
+				//將新資料再存入session中
 				$this->session->set_userdata('logged_in', $session_data);
 			}
 				
