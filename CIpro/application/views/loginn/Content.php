@@ -44,6 +44,7 @@
               <input id="login_user_password" type="password" class="validate" name ="login_user_password" value="<?= set_value('login_user_password')  ?>" >
               <label for="login_user_password">密碼</label>
               <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('login_user_password'); ?></span>
+              <a href="<?= base_url() ?>index.php/user_authentication/user_register">忘記密碼？</a>
             </div>
           </div>
           <button class="btn waves-effect waves-light btn-large" type="submit" name="action">登入
