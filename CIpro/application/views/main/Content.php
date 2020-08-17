@@ -56,6 +56,8 @@
 							<span class="edit"><?= $email;  ?></span>
 							<input type="text" class= "txtedit" data-id= '<?= $id  ?>' data-field= 'username' id= 'nametxt_<?= $id ?>' value= '<?= $username ?>'>
 						</td>
+						<td><?= $username;  ?></td>
+						<td><?= $email;  ?></td>
 						<td>
 							<?php 
 							if ($gender == 0){
@@ -68,9 +70,7 @@
 						</td>
 						<td><?= $hobby;  ?></td>
 						<td>
-							<button class="waves-effect waves-light btn" id="edit_user_profile">
-								<i class="material-icons left" >edit</i>編輯
-							</button>
+							<a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>編輯</a>
 						</td>
 					</tr>
 				</tbody>
