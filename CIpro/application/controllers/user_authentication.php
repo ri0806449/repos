@@ -210,8 +210,10 @@ class User_Authentication extends CI_Controller
 				
 				$this->email->from('dexster.wang@babyhome.com.tw','王志凌');
 				$this->email->to($email);
-				$this->email->subject('測試信件測試一波');
-				$this->email->message('如題，為了測試寄送功能不擇手段～');
+				$this->email->subject('此為CI實作會員系統遺失密碼認證信件');
+				$data['title'] = "CI實作會員系統";
+				$emaildescription=$this->load->view('reset_password/content',$data,TRUE);
+                $this->email->message($emaildescription);
 				$this->email->send();
 				echo $this->email->print_debugger();
 
