@@ -45,11 +45,12 @@
 			(
 				'field' => 'email',
 				'label' => '信箱',
-				'rules' => 'trim|required|valid_email',
+				'rules' => 'trim|required|valid_email|is_unique[user.email]',
 				'errors' => 
 				array(
 					'valid_email' => '無效的信箱地址',
-					'required' => '你有漏喔（信箱）'
+					'required' => '你有漏喔（信箱）',
+					'is_unique' => '你信箱跟別人重複囉',
 				)
 			),
 			array
@@ -113,5 +114,20 @@
 					'required' => '您貴人多忘事，忘記填密碼囉～',
 				)
 			),
-		)						
+		),
+
+		'verify_email' => array
+		(
+			array
+			(
+				'field' => 'verify_email',
+				'label' => '驗證信箱',
+				'rules' => 'trim|required',
+				'errors' => 
+				array
+				(
+					'required' => '您貴人多忘事，忘記填囉～(就一個欄位而已也可以漏填.....)',
+				)
+			),
+		),						
 	);
