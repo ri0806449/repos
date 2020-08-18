@@ -8,7 +8,7 @@
   </header>
   <main>
     <?php
-      //這兩部分應該就是登出與註冊成功（？）時會跳出的訊息了.....吧
+      //這部分應該就是登出成功（？）時會跳出的訊息了.....吧
       if (isset($logout_message)) {
       echo "<div class='message'>";
       echo $logout_message;
@@ -31,6 +31,13 @@
             }
             echo "</div>";
           ?>
+             <div class="message">
+                <?php 
+                  if (isset($inform_message)) {
+                    echo $inform_message;            
+                  }
+                ?>
+              </div>
               <div class="row">
                     <span class="helper-text reg_error" data-error="wrong" data-success="">            
                       <?php
