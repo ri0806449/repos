@@ -52,7 +52,7 @@ class User_Authentication extends CI_Controller
 			$data = array
 			(
 				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
+				'password' => md5($this->input->post('password')),
 				'email' => $this->input->post('email'),
 				'gender' => $this->input->post('gender'),
 				'hobby' => $this->input->post('hobby')
@@ -122,7 +122,7 @@ class User_Authentication extends CI_Controller
 			//以下則是第一次輸入帳密或重新輸入帳密時要做出的反應
 			$data = array(
 					'username' => $this->input->post('login_user_username'),
-					'password' => $this->input->post('login_user_password')
+					'password' => md5($this->input->post('login_user_password'))
 						);//先將使用者輸入的帳密存到$data陣列中
 			$result = $this->loginn_database->login($data);//用login function確認這組帳密是否在資料庫能撈出一筆資料
 			if ($result == TRUE) {
@@ -148,7 +148,7 @@ class User_Authentication extends CI_Controller
 			} else {
 				//無法以這組帳密在資料庫撈出一筆資料，顯示錯誤畫面並導回登入頁面
 				$data = array(
-							'error_message' => 'Invalid Username or Password'
+							'error_message' => '錯誤的帳號或密碼'
 							);
 				$data['title'] = "CI實作會員系統"; 
 				$this->load->view('loginn/header', $data);
@@ -158,7 +158,9 @@ class User_Authentication extends CI_Controller
 		}
 	}
 
-	public function update_user(){
+	//隨著使用者更動其資訊，更新session資料
+	public function update_user()
+	{
 	     // 得到使用者輸入的資料
 	     $id = $this->input->post('id');
 	     $field = $this->input->post('field');
@@ -169,7 +171,6 @@ class User_Authentication extends CI_Controller
 	     //更新session資料(該使用者全部資料更新一波)
 	     $result = $this->loginn_database->update_info_for_session($id);
 			if ($result != false) {
-
 				$new_session_data = array(
 									'id' => $result[0]->id,
 									'username' => $result[0]->username,
@@ -185,7 +186,38 @@ class User_Authentication extends CI_Controller
 	     //這是什麼啦 A：好啦跟你說，這個主要是運用在js後續判斷是否傳送成功，傳1代表成功傳送，傻傻的～
 	     echo 1;
 	     exit;
-	   }
+	}
+
+	//忘記密碼流程
+	public function forgot_password()
+	{	
+		if($this->form_validation->run('verify_email') == FALSE){
+			//如果忘記填的話再次導向忘記密碼頁面，提醒輸入
+			$data['title'] = "CI實作會員系統";
+			$this->load->view('forgot_password/header',$data);
+			$this->load->view('forgot_password/content',$data);
+			$this->load->view('forgot_password/footer',$data);			
+		}else{
+			//有填，則傳到資料庫確認是否有一筆資料相符
+			$email = $this->input->post('verify_email');
+			if ($this->loginn_database->verify_email($email)) {
+				//生成暫時密碼，並email出去
+				$data['title'] ="帥啊老皮";
+				$this->load->view('forgot_password/header',$data);
+				$this->load->view('forgot_password/content',$data);
+				$this->load->view('forgot_password/footer',$data);
+			}else{
+				$data['title'] = "老皮一點都不帥😭";
+				$this->load->view('forgot_password/header',$data);
+				$this->load->view('forgot_password/content',$data);
+				$this->load->view('forgot_password/footer',$data);
+			}
+		}
+
+		
+		
+	}
+
 
 
 	//從主頁登出

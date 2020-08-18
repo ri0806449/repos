@@ -57,4 +57,15 @@
 				return false;
 			}
 		}
+
+		//忘記密碼時驗證email是否存在
+		public function verify_email($email)
+		{
+			$query = $this->db->get_where('user',array('email'=>$email),1);
+			if ($query->num_rows() == 1) {
+				return true;
+			}else{
+				return false;
+			}
+		}
 	}
