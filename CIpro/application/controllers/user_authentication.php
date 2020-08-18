@@ -16,6 +16,8 @@ class User_Authentication extends CI_Controller
 		$this->load->model('loginn_database');
 		//載入資料庫model，取得編輯資料
 		$this->load->model('member_model');
+		//載入email資源
+		$this->load->library('email');
 	}
 
 	//登入主頁的相關資訊
@@ -201,21 +203,56 @@ class User_Authentication extends CI_Controller
 			//有填，則傳到資料庫確認是否有一筆資料相符
 			$email = $this->input->post('verify_email');
 			if ($this->loginn_database->verify_email($email)) {
-				//生成暫時密碼，並email出去
+				//生成暫時密碼，並email出去，還是要將寄出內容改為包含token之重設密碼連結？
+				//然後之後導入頁面提示「驗證連結已寄至您的信箱，請前往收信」，並設定自動跳轉登入頁面
+
+
+				
+				$this->email->from('dexster.wang@babyhome.com.tw','王志凌');
+				$this->email->to($email);
+				$this->email->subject('測試信件測試一波');
+				$this->email->message('如題，為了測試寄送功能不擇手段～');
+				$this->email->send();
+				echo $this->email->print_debugger();
+
 				$data['title'] ="帥啊老皮";
 				$this->load->view('forgot_password/header',$data);
 				$this->load->view('forgot_password/content',$data);
 				$this->load->view('forgot_password/footer',$data);
 			}else{
-				$data['title'] = "老皮一點都不帥😭";
+				$data = array(
+							'error_message' => '不存在的信箱！！'
+							);
+				$data['title'] = "CI實作會員系統";
 				$this->load->view('forgot_password/header',$data);
 				$this->load->view('forgot_password/content',$data);
 				$this->load->view('forgot_password/footer',$data);
 			}
-		}
+		}	
+	}
 
-		
-		
+	//重設密碼流程
+	public function reset_password()
+	{
+		if ($this->form_validation->run('reset_password') == FALSE) {
+			//密碼驗證失敗，重新導入重設密碼頁面
+			$data['title'] = "CI實作會員系統";
+			$this->load->view('reset_password/header',$data);
+			$this->load->view('reset_password/content',$data);
+			$this->load->view('reset_password/footer',$data);			
+		}else{
+			//密碼通過驗證，將密碼寫入資料庫，同時導向登入頁面
+			
+
+
+			$data = array(
+					'inform_message' => '更改密碼成功囉～請重新登入！！'
+					);
+			$data['title'] = "CI實作會員系統"; 
+			$this->load->view('loginn/header', $data);
+			$this->load->view('loginn/content',$data);
+			$this->load->view('loginn/footer',$data);
+		}	
 	}
 
 
