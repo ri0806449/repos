@@ -57,3 +57,8 @@ a.wave-effect.intro
 {
 	background-color: #42a5f5;
 }
+
+div.error_msg
+{
+  color: red;
+}

@@ -129,5 +129,34 @@
 					'required' => '您貴人多忘事，忘記填囉～(就一個欄位而已也可以漏填.....)',
 				)
 			),
+		),	
+
+		'reset_password' => array
+		(
+			array
+			(
+				'field' => 'reset_password',
+				'label' => '密碼',
+				'rules' => 'trim|required|min_length[4]|max_length[16]',
+				'errors' => //錯誤時應該跳出來的訊息
+				array(
+					'required' => '你有漏喔（密碼）',
+					'min_length' => '你太短了（密碼）',
+					'max_length' => '你太長了！（密碼）'
+				)
+			),
+			array
+			(
+				'field' => 'reset_password_retype',
+				'label' => '密碼確認',
+				'rules' => 'trim|required|matches[reset_password]',
+				'errors' => 
+				array(
+					'matches' => '確認密碼與原密碼不相符',
+					'required' => '你有漏喔（密碼確認）',
+					'min_length' => '你太短了（密碼確認）',
+					'max_length' => '你太長了！（密碼確認）'
+				)
+			),
 		),						
 	);
