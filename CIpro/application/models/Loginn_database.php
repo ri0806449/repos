@@ -68,4 +68,32 @@
 				return false;
 			}
 		}
+
+		//將token存進去資料庫裡
+		public function save_token($email,$token)
+		{
+			//將token update進資料庫
+ 			$this->db->where('email' , $email);
+ 			$this->db->update('user', $token);
+ 			$affected = $this->db->affected_rows();
+ 			if ($affected > 0) {
+ 				return true;
+ 			}else{
+ 				return false;
+ 			}
+
+		}
+
+		//用網址取得的token值取得該使用者資訊，並換密碼一波
+		public function change_password($data,$new_password)
+		{	
+			//將新密碼 update進資料庫
+ 			$this->db->where('token', $data['token_varify']);
+ 			$query = $this->db->update('user', $new_password);
+ 			if ($affected > 0) {
+ 				return true;
+ 			}else{
+ 				return false;
+ 			}
+		}
 	}
