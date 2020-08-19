@@ -204,10 +204,7 @@ class User_Authentication extends CI_Controller
 			$email = $this->input->post('verify_email');
 			if ($this->loginn_database->verify_email($email)) {
 				$token = [];
-				//生成暫時密碼，並email出去，還是要將寄出內容改為包含token之重設密碼連結？
 				//然後之後導入頁面提示「驗證連結已寄至您的信箱，請前往收信」，並設定自動跳轉登入頁面
-
-
 				//產出亂數，存於要寄出的網址中，並存入資料庫token欄位以供辨認
 				$token = array(
 								'token'=>rand().rand(),
@@ -237,9 +234,6 @@ class User_Authentication extends CI_Controller
 						$this->load->view('forgot_password/content',$data);
 						$this->load->view('forgot_password/footer',$data);
 				}
-				
-
-
 			}else{
 				$data = array(
 							'error_message' => '不存在的信箱！！'
@@ -256,8 +250,6 @@ class User_Authentication extends CI_Controller
 	public function reset_password()
 	{	
 		$data['token_varify'] = $this->uri->segment(3);
-		//取得網址的token區段，並用來跟資料庫的token作比對，如有該筆資料則繼續；如無，則回饋"操作時間逾時"
-		if (isset($data['token_varify'])) {
 			//有token資料，進行更改密碼的環節，先密碼格式驗證
 			if ($this->form_validation->run('reset_password') == FALSE) {
 				//密碼驗證失敗，重新導入重設密碼頁面
@@ -266,12 +258,13 @@ class User_Authentication extends CI_Controller
 				$this->load->view('reset_password/content',$data);
 				$this->load->view('reset_password/footer',$data);			
 			}else{
-		echo($data['token_varify']);
-		exit;
+				var_dump($data['token_varify']);
 				//密碼通過驗證，將密碼寫入資料庫，同時導向登入頁面
 				
 				//透過token取得該位使用者的資訊，以進行密碼修改
-				$new_password = md5($this->input->post('reset_password'));
+				$new_password = array(
+									'password' => md5($this->input->post('reset_password'))
+									);
 				if ($this->loginn_database->change_password($data,$new_password)) {
 				$data = array(
 							'inform_message' => '更改密碼成功囉～請重新登入！！'
@@ -283,7 +276,7 @@ class User_Authentication extends CI_Controller
 				}else{
 					//過期了，沒有找到token資料，導入主頁
 					$data = array(
-							'error_message' => '操作時間逾時，請重新操作。1'
+							'error_message' => '操作時間逾時，請重新操作。'
 							);
 					$data['title'] = "CI實作會員系統"; 
 					$this->load->view('loginn/header', $data);
@@ -291,18 +284,6 @@ class User_Authentication extends CI_Controller
 					$this->load->view('loginn/footer',$data);
 				}
 			}	
-		}else{
-			//沒有找到token資料，導入主頁
-			$data = array(
-					'error_message' => '操作時間逾時，請重新操作。2'
-					);
-			$data['title'] = "CI實作會員系統"; 
-			$this->load->view('loginn/header', $data);
-			$this->load->view('loginn/content',$data);
-			$this->load->view('loginn/footer',$data);			
-		}
-
-
 	}
 
 

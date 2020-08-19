@@ -89,7 +89,8 @@
 		{	
 			//將新密碼 update進資料庫
  			$this->db->where('token', $data['token_varify']);
- 			$query = $this->db->update('user', $new_password);
+ 			$this->db->update('user', $new_password);
+ 			$affected = $this->db->affected_rows();
  			if ($affected > 0) {
  				return true;
  			}else{
