@@ -100,15 +100,23 @@
 		//用網址取得的token值取得該使用者資訊，並換密碼一波
 		public function change_password($data,$new_password)
 		{	
-			//將新密碼 update進資料庫
- 			$this->db->where('token', $data['token_varify']);
- 			$this->db->update('user', $new_password);
- 			$affected = $this->db->affected_rows();
- 			if ($affected > 0) {
- 				return true;
- 			}else{
- 				return false;
- 			}
+			//先搜尋有沒有這個密碼
+ 			$query = $this->db->get_where('user',array('token'=>$data['token_varify'],'password'=>$new_password['password']),1);
+			if ($query->num_rows() == 1) {
+				return true;
+			}else{
+				//將新密碼 update進資料庫
+	 			$this->db->where('token', $data['token_varify']);
+	 			$this->db->update('user', $new_password);
+	 			$affected = $this->db->affected_rows();
+	 			if ($affected > 0) {
+	 				//更改成功
+	 				return true;
+	 			}else{
+	 				//token過期
+	 				return false;
+	 			}
+			}
 		}
 
 		//刪除token值
