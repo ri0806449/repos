@@ -84,7 +84,7 @@
 
 		}
 
-		//	將token值拿進資料庫比對，如有資料則取出資料庫的token值，避免重新載入頁面就被洗掉
+		//	將token值拿進資料庫比對，如有資料傳true，無則傳false
 		public function token_match($data)
 		{
  			$query = $this->db->get_where('user',array('token'=>$data['token_varify']),1);
@@ -109,5 +109,16 @@
  			}else{
  				return false;
  			}
+		}
+
+		//刪除token值
+		public function delete_token($data)
+		{	
+			//定義token空字串後代入，以符合update格式
+			$empty_token = [
+						'token' => ""
+							];
+			$this->db->where('token', $data['token_varify']);
+ 			$this->db->update('user', $empty_token);
 		}
 	}

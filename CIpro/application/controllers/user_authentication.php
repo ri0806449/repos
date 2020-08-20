@@ -275,13 +275,15 @@ class User_Authentication extends CI_Controller
 									'password' => md5($this->input->post('reset_password'))
 									);
 				if ($this->loginn_database->change_password($data,$new_password)) {
-				$data = array(
-							'inform_message' => '更改密碼成功囉～請重新登入！！'
-							);
-				$data['title'] = "CI實作會員系統"; 
-				$this->load->view('loginn/header', $data);
-				$this->load->view('loginn/content',$data);
-				$this->load->view('loginn/footer',$data);
+					//刪除token值
+					$this->loginn_database->delete_token($data);
+					$data = array(
+								'inform_message' => '更改密碼成功囉～請重新登入！！'
+								);
+					$data['title'] = "CI實作會員系統"; 
+					$this->load->view('loginn/header', $data);
+					$this->load->view('loginn/content',$data);
+					$this->load->view('loginn/footer',$data);
 				}else{
 					//過期了，沒有找到token資料，導入主頁
 					$data = array(
