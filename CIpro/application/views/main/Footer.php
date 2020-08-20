@@ -54,6 +54,14 @@
 		    $('.tap-target').tapTarget();
 		  });
 	 </script>
+	 <script type="text/javascript">
+	 	//比".ready"的function還要慢執行，待畫面載入後尚須所有檔案都載入後才會執行
+	 	window.onload = function()
+	 	{
+	 		//針對自我介紹彈出圓圈做位置上的調整，才不會讓畫面有一大片空白
+	    	$('.tap-target-wrapper').css("position","fixed");
+	 	}
+	 </script>
   	 <footer class = "page-footer">
 		 <div class="footer-copyright">
             <div class="container">
