@@ -11,29 +11,28 @@
 		</div>
 	</div>
 	  <!-- Tap Target Structure -->
-	  <div class="tap-target" data-target="menu">
-	    <div class="tap-target-content">
-	      <h5><?= $username ?> 的相關資訊</h5>
-	      <div>帳號：<?=$username  ?></div>
-	      <div>
-	      	性別：
-	      	<?php 
-	      		if ($gender == 1) {
-	      			echo "男";
-	      		}else{
-	      			echo "女";
-	      		}
-	      	?>
-	      </div>
-	      <div>信箱：<?=$email  ?></div>
-	      <div>興趣：<?=$hobby  ?></div>
-	    </div>
+	  <div class="row">
+	  	<div class="col s12">
+		  <div class="tap-target" data-target="menu">
+		    <div class="tap-target-content">
+		      <h5><?= $username ?> 的相關資訊</h5>
+		      <div>帳號：<?=$username  ?></div>
+		      <div>
+		      	性別：
+		      	<?php 
+		      		if ($gender == 1) {
+		      			echo "男";
+		      		}else{
+		      			echo "女";
+		      		}
+		      	?>
+		      </div>
+		      <div>信箱：<?=$email  ?></div>
+		      <div>興趣：<?=$hobby  ?></div>
+		    </div>
+		  </div>	  		
+	  	</div>
 	  </div>
-	<div class="row">
-		<div class="col s12 offset-s11">
-			<a id="menu" class="waves-effect waves-light btn-large btn-floating" ><i class="material-icons assist">menu</i></a>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col s9 offset-s1">
 			<table class="centered highlight">
@@ -81,7 +80,12 @@
 	</div>
 	<div class="row">
 		<div class="col s12 center">
-			<a class="waves-effect waves-light btn-large" id="logout" href="logout"><i class="material-icons right">cloud</i>登出</a>
+			<a class="waves-effect waves-light btn-large user_logout" id="logout" href="logout"><i class="material-icons right">cloud</i>登出</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s1 offset-s11">
+			<a id="menu" class="waves-effect waves-light btn-large btn-floating" ><i class="material-icons assist">menu</i></a>
 		</div>
 	</div>
 	</main>
