@@ -84,6 +84,19 @@
 
 		}
 
+		//	將token值拿進資料庫比對，如有資料則取出資料庫的token值，避免重新載入頁面就被洗掉
+		public function token_match($data)
+		{
+ 			$query = $this->db->get_where('user',array('token'=>$data['token_varify']),1);
+			if ($query->num_rows() == 1) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+
+
 		//用網址取得的token值取得該使用者資訊，並換密碼一波
 		public function change_password($data,$new_password)
 		{	

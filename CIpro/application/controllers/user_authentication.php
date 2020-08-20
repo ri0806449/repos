@@ -23,11 +23,18 @@ class User_Authentication extends CI_Controller
 	//登入主頁的相關資訊
 	public function index()
 	{	
-		//$data['user'] = $this->member_model->get_member_data();
-		$data['title'] = "CI實作會員系統";
-		$this->load->view('loginn/header', $data);
-		$this->load->view('loginn/content',$data);
-		$this->load->view('loginn/footer',$data);
+		if(isset($this->session->userdata['logged_in'])){
+			$session_data = $this->session->userdata['logged_in'];
+			$session_data['title'] = "CI實作會員系統";
+			$this->load->view('main/header',$session_data);
+			$this->load->view('main/content',$session_data);
+			$this->load->view('main/footer',$session_data);
+		}else{
+			$data['title'] = "CI實作會員系統"; 
+			$this->load->view('loginn/header', $data);
+			$this->load->view('loginn/content',$data);
+			$this->load->view('loginn/footer',$data);
+		}
 	}
 
 	//註冊頁面的相關資訊
@@ -250,15 +257,16 @@ class User_Authentication extends CI_Controller
 	public function reset_password()
 	{	
 		$data['token_varify'] = $this->uri->segment(3);
+		//將網址的token值拿進資料庫做比對，如有相符資料則取出資料庫的token值，避免網址被洗掉，如無相符則導回登入頁面（代表token值已被刪除）
+		if ($this->loginn_database->token_match($data)) {
 			//有token資料，進行更改密碼的環節，先密碼格式驗證
 			if ($this->form_validation->run('reset_password') == FALSE) {
 				//密碼驗證失敗，重新導入重設密碼頁面
 				$data['title'] = "CI實作會員系統";
 				$this->load->view('reset_password/header',$data);
 				$this->load->view('reset_password/content',$data);
-				$this->load->view('reset_password/footer',$data);			
+				$this->load->view('reset_password/footer',$data);
 			}else{
-				var_dump($data['token_varify']);
 				//密碼通過驗證，將密碼寫入資料庫，同時導向登入頁面
 				
 				//透過token取得該位使用者的資訊，以進行密碼修改
@@ -283,7 +291,17 @@ class User_Authentication extends CI_Controller
 					$this->load->view('loginn/content',$data);
 					$this->load->view('loginn/footer',$data);
 				}
-			}	
+			}
+		}else{
+			//過期了，沒有找到token資料，導入主頁
+			$data = array(
+					'error_message' => '操作時間逾時，請重新操作。'
+					);
+			$data['title'] = "CI實作會員系統"; 
+			$this->load->view('loginn/header', $data);
+			$this->load->view('loginn/content',$data);
+			$this->load->view('loginn/footer',$data);			
+		}	
 	}
 
 
