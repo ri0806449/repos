@@ -73,6 +73,7 @@
 		public function save_token($email,$token)
 		{	
 			//新增token的建立時間，以計算何時可以刪除
+			//必須使用date()這個函數將timestamp轉換成可讀的日期時間格式，才有辦法寫進資料庫，否則格式不符	
 			$date = date('Y-m-d H:i:s', time()); 
 			$token_ctime = [
 					'token_create_time' => $date
