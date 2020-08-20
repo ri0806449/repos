@@ -308,7 +308,6 @@ class User_Authentication extends CI_Controller
 	}
 
 
-
 	//從主頁登出
 	public function logout()
 	{
