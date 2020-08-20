@@ -71,10 +71,25 @@
 
 		//將token存進去資料庫裡
 		public function save_token($email,$token)
-		{
+		{	
+			//新增token的建立時間，以計算何時可以刪除
+			$date = date('H:i:s', time());
+			$token_ctime = [
+					'token_create_time' => $date
+						];
+			$expire_date = date('H:i:s', time()+(60*15));
+			$token_etime = [
+					'token_expire_time' => $expire_date
+						];
 			//將token update進資料庫
  			$this->db->where('email' , $email);
  			$this->db->update('user', $token);
+ 			//將創立token時間 update進資料庫
+ 			$this->db->where('email' , $email);
+ 			$this->db->update('user', $token_ctime); 
+ 			//將過期的token時間 update進資料庫
+ 			$this->db->where('email' , $email);
+ 			$this->db->update('user', $token_etime);
  			$affected = $this->db->affected_rows();
  			if ($affected > 0) {
  				return true;
