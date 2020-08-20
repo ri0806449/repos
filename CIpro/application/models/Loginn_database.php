@@ -73,11 +73,11 @@
 		public function save_token($email,$token)
 		{	
 			//新增token的建立時間，以計算何時可以刪除
-			$date = date('H:i:s', time());
+			$date = date('Y-m-d H:i:s', time()); 
 			$token_ctime = [
 					'token_create_time' => $date
 						];
-			$expire_date = date('H:i:s', time()+(60*15));
+			$expire_date = date('Y-m-d H:i:s', time()+(60*15));
 			$token_etime = [
 					'token_expire_time' => $expire_date
 						];
@@ -108,6 +108,29 @@
 			}else{
 				return false;
 			}
+		}
+
+		//判斷token是否超過15分鐘，超過15分鐘即過期，刪除token
+		public function expire_token($data)
+		{
+			$this->db->select('token_expire_time');
+			$query = $this->db->get_where('user',array('token' => $data['token_varify']),1);
+
+			if ($query->num_rows() > 0)
+			{
+			   $row = $query->row_array();
+			   //將過期時間轉成timestamp形式
+			   $etime = strtotime($row['token_expire_time']);
+			   if (time() > $etime) {
+			   	//已過期，刪除token
+					//定義token空字串後代入，以符合update格式
+					$empty_token = [
+								'token' => ""
+									];
+					$this->db->where('token', $data['token_varify']);
+		 			$this->db->update('user', $empty_token);
+			   }
+			}		
 		}
 
 

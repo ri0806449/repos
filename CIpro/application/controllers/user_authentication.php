@@ -219,7 +219,7 @@ class User_Authentication extends CI_Controller
 							); 				
 				$this->email->from('dexster.wang@babyhome.com.tw','王志凌');
 				$this->email->to($email);
-				$this->email->subject('此為CI實作會員系統遺失密碼認證信件');
+				$this->email->subject('此為CI實作會員系統遺失密碼認證信件，請於15分鐘內使用連結');
                 $this->email->message("請點選下方連結：{unwrap}http://localhost/repos/CIpro/index.php/user_authentication/reset_password/".$token['token']."{/unwrap}");
 				$this->email->send();
 				echo $this->email->print_debugger();
@@ -227,7 +227,7 @@ class User_Authentication extends CI_Controller
 				//將$token存於資料庫中
 				if ($this->loginn_database->save_token($email,$token)) {
 						$data = array(
-								'inform_message' => '請至信箱收信'
+								'inform_message' => '請至信箱收信，信件有效時間為15分鐘'
 								);
 						$data['title'] = "CI實作會員系統"; 
 						$this->load->view('loginn/header', $data);
@@ -258,6 +258,8 @@ class User_Authentication extends CI_Controller
 	public function reset_password()
 	{	
 		$data['token_varify'] = $this->uri->segment(3);
+		//判斷token是否超過15分鐘，超過15分鐘即過期，刪除token
+		$this->loginn_database->expire_token($data);
 		//將網址的token值拿進資料庫做比對，如有相符資料則取出資料庫的token值，避免網址被洗掉，如無相符則導回登入頁面（代表token值已被刪除）
 		if ($this->loginn_database->token_match($data)) {
 			//有token資料，進行更改密碼的環節，先密碼格式驗證
@@ -306,6 +308,7 @@ class User_Authentication extends CI_Controller
 			$this->load->view('loginn/footer',$data);			
 		}	
 	}
+
 
 
 	//從主頁登出
