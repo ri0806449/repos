@@ -27,13 +27,13 @@
                 </div>
                 <!--密碼輸入-->
                 <div class="input-field col s6">
-                  <input id="password" type="text" class="validate" name="password" value="<?= set_value('password'); ?>">
+                  <input id="password" type="password" class="validate" name="password" value="<?= set_value('password'); ?>">
                   <label for="password">密碼</label>
                   <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('password'); ?></span>
                 </div>
                 <!--確認密碼輸入-->
                 <div class="input-field col s6">
-                  <input id="password_retype" type="text" class="validate" name="password_retype" value="<?= set_value('password_retype'); ?>">
+                  <input id="password_retype" type="password" class="validate" name="password_retype" value="<?= set_value('password_retype'); ?>">
                   <label for="password_retype">再輸入一次密碼</label>
                   <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('password_retype'); ?></span>
                 </div>

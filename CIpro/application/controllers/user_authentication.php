@@ -164,11 +164,12 @@ class User_Authentication extends CI_Controller
 				$this->load->view('loginn/content',$data);
 				$this->load->view('loginn/footer',$data);
 			}
+
 		}
 	}
 
 	//隨著使用者更動其資訊，更新session資料
-	public function update_user()
+	protected function update_user()
 	{
 	     // 得到使用者輸入的資料
 	     $id = $this->input->post('id');

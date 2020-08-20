@@ -10,13 +10,13 @@
 					<legend><h5>忘記密碼——重新設定密碼</h5></legend>
 	                <!--密碼輸入-->
 	                <div class="input-field col s6">
-	                  <input id="reset_password" type="text" class="validate" name="reset_password" value="<?= set_value('reset_password'); ?>" autofocus>
+	                  <input id="reset_password" type="password" class="validate" name="reset_password" value="<?= set_value('reset_password'); ?>" autofocus>
 	                  <label for="reset_password">設定新密碼</label>
 	                  <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('reset_password'); ?></span>
 	                </div>
 	                <!--確認密碼輸入-->
 	                <div class="input-field col s6">
-	                  <input id="reset_password_retype" type="text" class="validate" name="reset_password_retype" value="<?= set_value('reset_password_retype'); ?>">
+	                  <input id="reset_password_retype" type="password" class="validate" name="reset_password_retype" value="<?= set_value('reset_password_retype'); ?>">
 	                  <label for="reset_password_retype">再輸入一次密碼</label>
 	                  <span class="helper-text reg_error" data-error="wrong" data-success=""><?= form_error('reset_password_retype'); ?></span>
 	                </div>

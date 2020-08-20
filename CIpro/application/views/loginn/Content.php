@@ -8,7 +8,7 @@
   </header>
   <main>
     <?php
-      //這部分應該就是登出成功（？）時會跳出的訊息了.....吧
+      //這部分是登出成功時會跳出的訊息
       if (isset($logout_message)) {
       echo "<div class='message'>";
       echo $logout_message;
