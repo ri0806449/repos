@@ -309,6 +309,44 @@ class User_Authentication extends CI_Controller
 		}	
 	}
 
+	//在主頁中重設密碼
+	public function want_to_reset_password()
+	{	
+		//在這個環節用不到token，定一一下空值避免reset_password/content.php的網址出問題
+		$token_varify='';
+		if (isset($this->session->userdata['logged_in'])) {
+			$session_data = $this->session->userdata['logged_in'];
+			//進行更改密碼的環節，先密碼格式驗證
+			if ($this->form_validation->run('reset_password') == FALSE) {
+				//密碼驗證失敗，重新導入重設密碼頁面
+				$session_data['title'] = "CI實作會員系統";
+				$this->load->view('want_to_reset_password/header',$session_data);
+				$this->load->view('want_to_reset_password/content',$session_data);
+				$this->load->view('want_to_reset_password/footer',$session_data);
+			}else{
+				//密碼通過驗證，將密碼寫入資料庫，同時導向登入頁面
+				
+				//透過session取得該位使用者的資訊，以進行密碼修改
+				$new_password = array(
+									'password' => md5($this->input->post('reset_password'))
+									);
+				if ($this->loginn_database->want_to_change_password($session_data,$new_password)) {
+					//密碼已修改，回主頁
+					echo '<script>alert("密碼修改成功囉超級恭喜～"); location.href="user_login_process";</script>';
+				}else{
+					//密碼沒有換，回主頁
+					echo '<script>alert("密碼沒有變喔但還是超級恭喜～"); location.href="user_login_process";</script>;';
+				}
+			}			
+		}else{
+			$data['title'] = "CI實作會員系統"; 
+			$this->load->view('loginn/header', $data);
+			$this->load->view('loginn/content',$data);
+			$this->load->view('loginn/footer',$data);				
+		}
+	
+	}	
+
 
 
 	//從主頁登出

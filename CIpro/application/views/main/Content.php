@@ -80,6 +80,11 @@
 	</div>
 	<div class="row">
 		<div class="col s12 center">
+			<a class="waves-effect waves-light btn-large user_logout" id="want_to_reset_password" href="want_to_reset_password"><i class="material-icons right">edit</i>修改密碼</a>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col s12 center">
 			<a class="waves-effect waves-light btn-large user_logout" id="logout" href="logout"><i class="material-icons right">cloud</i>登出</a>
 		</div>
 	</div>

@@ -143,6 +143,7 @@
  			$query = $this->db->get_where('user',array('token'=>$data['token_varify'],'password'=>$new_password['password']),1);
 			if ($query->num_rows() == 1) {
 				return true;
+				//因為在user_authentication裡已經做過token的驗證，所以在這邊不用再次判別token是否match
 			}else{
 				//將新密碼 update進資料庫
 	 			$this->db->where('token', $data['token_varify']);
@@ -156,6 +157,24 @@
 	 				return false;
 	 			}
 			}
+		}
+
+		//用session取得該使用者資訊，並換密碼一波
+		public function want_to_change_password($session_data,$new_password)
+		{	
+
+			//將新密碼 update進資料庫
+ 			$this->db->where('id', $session_data['id']);
+ 			$this->db->update('user', $new_password);
+ 			$affected = $this->db->affected_rows();
+ 			if ($affected > 0) {
+ 				//更改成功
+ 				return true;
+ 			}else{
+ 				//密碼沒有換
+ 				return false;
+ 			}
+			
 		}
 
 		//刪除token值
