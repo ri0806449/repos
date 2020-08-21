@@ -34,7 +34,7 @@
 		//忘記密碼時驗證email是否存在
 		public function verify_email($email)
 		{
-			$query = $this->db->get_where('user',array('email'=>$email),1);
+			$query = $this->db->get_where('admin',array('email'=>$email),1);
 			if ($query->num_rows() == 1) {
 				return true;
 			}else{
@@ -57,13 +57,13 @@
 						];
 			//將token update進資料庫
  			$this->db->where('email' , $email);
- 			$this->db->update('user', $token);
+ 			$this->db->update('admin', $token);
  			//將創立token時間 update進資料庫
  			$this->db->where('email' , $email);
- 			$this->db->update('user', $token_ctime); 
+ 			$this->db->update('admin', $token_ctime); 
  			//將過期的token時間 update進資料庫
  			$this->db->where('email' , $email);
- 			$this->db->update('user', $token_etime);
+ 			$this->db->update('admin', $token_etime);
  			$affected = $this->db->affected_rows();
  			if ($affected > 0) {
  				return true;
@@ -76,7 +76,7 @@
 		//	將token值拿進資料庫比對，如有資料傳true，無則傳false
 		public function token_match($data)
 		{
- 			$query = $this->db->get_where('user',array('token'=>$data['token_varify']),1);
+ 			$query = $this->db->get_where('admin',array('token'=>$data['token_varify']),1);
 			if ($query->num_rows() == 1) {
 				return true;
 			}else{
@@ -88,7 +88,7 @@
 		public function expire_token($data)
 		{
 			$this->db->select('token_expire_time');
-			$query = $this->db->get_where('user',array('token' => $data['token_varify']),1);
+			$query = $this->db->get_where('admin',array('token' => $data['token_varify']),1);
 
 			if ($query->num_rows() > 0)
 			{
@@ -102,7 +102,7 @@
 								'token' => ""
 									];
 					$this->db->where('token', $data['token_varify']);
-		 			$this->db->update('user', $empty_token);
+		 			$this->db->update('admin', $empty_token);
 			   }
 			}		
 		}
@@ -113,14 +113,14 @@
 		public function change_password($data,$new_password)
 		{	
 			//先搜尋有沒有這個密碼
- 			$query = $this->db->get_where('user',array('token'=>$data['token_varify'],'password'=>$new_password['password']),1);
+ 			$query = $this->db->get_where('admin',array('token'=>$data['token_varify'],'password'=>$new_password['password']),1);
 			if ($query->num_rows() == 1) {
 				return true;
 				//因為在user_authentication裡已經做過token的驗證，所以在這邊不用再次判別token是否match
 			}else{
 				//將新密碼 update進資料庫
 	 			$this->db->where('token', $data['token_varify']);
-	 			$this->db->update('user', $new_password);
+	 			$this->db->update('admin', $new_password);
 	 			$affected = $this->db->affected_rows();
 	 			if ($affected > 0) {
 	 				//更改成功
@@ -158,6 +158,6 @@
 						'token' => ""
 							];
 			$this->db->where('token', $data['token_varify']);
- 			$this->db->update('user', $empty_token);
+ 			$this->db->update('admin', $empty_token);
 		}
 	}

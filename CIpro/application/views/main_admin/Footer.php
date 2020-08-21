@@ -49,8 +49,6 @@
 	    		});
 	    	});
 
-		    //materialize的js
-		    $('.tap-target').tapTarget();
 		  });
 	 </script>
   	 <footer class = "page-footer">

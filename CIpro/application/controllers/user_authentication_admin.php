@@ -114,7 +114,7 @@ class User_Authentication_admin extends CI_Controller
 	}
 
 
-	//隨著使用者更動其資訊，更新session資料
+	//管理者更動資訊
 	public function update_user_admin()
 	{
 	     // 得到使用者輸入的資料
@@ -135,9 +135,9 @@ class User_Authentication_admin extends CI_Controller
 		if($this->form_validation->run('verify_email') == FALSE){
 			//如果忘記填的話再次導向忘記密碼頁面，提醒輸入
 			$data['title'] = "CI實作會員系統後台";
-			$this->load->view('forgot_password/header',$data);
-			$this->load->view('forgot_password/content',$data);
-			$this->load->view('forgot_password/footer',$data);			
+			$this->load->view('forgot_password_admin/header',$data);
+			$this->load->view('forgot_password_admin/content',$data);
+			$this->load->view('forgot_password_admin/footer',$data);			
 		}else{
 			//有填，則傳到資料庫確認是否有一筆資料相符
 			$email = $this->input->post('verify_email');
@@ -151,7 +151,7 @@ class User_Authentication_admin extends CI_Controller
 				$this->email->from('dexster.wang@babyhome.com.tw','王志凌');
 				$this->email->to($email);
 				$this->email->subject('此為CI實作會員系統後台遺失密碼認證信件，請於15分鐘內使用連結');
-                $this->email->message("請點選下方連結：{unwrap}http://localhost/repos/CIpro/index.php/user_authentication/reset_password/".$token['token']."{/unwrap}");
+                $this->email->message("請點選下方連結：{unwrap}http://localhost/repos/CIpro/index.php/user_authentication_admin/reset_password/".$token['token']."{/unwrap}");
 				$this->email->send();
 				echo $this->email->print_debugger();
 
@@ -161,26 +161,26 @@ class User_Authentication_admin extends CI_Controller
 								'inform_message' => '請至信箱收信，信件有效時間為15分鐘'
 								);
 						$data['title'] = "CI實作會員系統後台"; 
-						$this->load->view('loginn/header', $data);
-						$this->load->view('loginn/content',$data);
-						$this->load->view('loginn/footer',$data);
+						$this->load->view('loginn_admin/header', $data);
+						$this->load->view('loginn_admin/content',$data);
+						$this->load->view('loginn_admin/footer',$data);
 				}else{
 						$data = array(
 									'error_message' => 'token值無法存入，請稍後再試。'
 									);
 						$data['title'] = "CI實作會員系統後台";
-						$this->load->view('forgot_password/header',$data);
-						$this->load->view('forgot_password/content',$data);
-						$this->load->view('forgot_password/footer',$data);
+						$this->load->view('forgot_password_admin/header',$data);
+						$this->load->view('forgot_password_admin/content',$data);
+						$this->load->view('forgot_password_admin/footer',$data);
 				}
 			}else{
 				$data = array(
 							'error_message' => '不存在的信箱！！'
 							);
 				$data['title'] = "CI實作會員系統後台";
-				$this->load->view('forgot_password/header',$data);
-				$this->load->view('forgot_password/content',$data);
-				$this->load->view('forgot_password/footer',$data);
+				$this->load->view('forgot_password_admin/header',$data);
+				$this->load->view('forgot_password_admin/content',$data);
+				$this->load->view('forgot_password_admin/footer',$data);
 			}
 		}	
 	}
@@ -197,9 +197,9 @@ class User_Authentication_admin extends CI_Controller
 			if ($this->form_validation->run('reset_password') == FALSE) {
 				//密碼驗證失敗，重新導入重設密碼頁面
 				$data['title'] = "CI實作會員系統後台";
-				$this->load->view('reset_password/header',$data);
-				$this->load->view('reset_password/content',$data);
-				$this->load->view('reset_password/footer',$data);
+				$this->load->view('reset_password_admin/header',$data);
+				$this->load->view('reset_password_admin/content',$data);
+				$this->load->view('reset_password_admin/footer',$data);
 			}else{
 				//密碼通過驗證，將密碼寫入資料庫，同時導向登入頁面
 				
@@ -214,18 +214,18 @@ class User_Authentication_admin extends CI_Controller
 								'inform_message' => '更改密碼成功囉～請重新登入！！'
 								);
 					$data['title'] = "CI實作會員系統後台"; 
-					$this->load->view('loginn/header', $data);
-					$this->load->view('loginn/content',$data);
-					$this->load->view('loginn/footer',$data);
+					$this->load->view('loginn_admin/header', $data);
+					$this->load->view('loginn_admin/content',$data);
+					$this->load->view('loginn_admin/footer',$data);
 				}else{
 					//過期了，沒有找到token資料，導入主頁
 					$data = array(
 							'error_message' => '操作時間逾時，請重新操作。'
 							);
 					$data['title'] = "CI實作會員系統後台"; 
-					$this->load->view('loginn/header', $data);
-					$this->load->view('loginn/content',$data);
-					$this->load->view('loginn/footer',$data);
+					$this->load->view('loginn_admin/header', $data);
+					$this->load->view('loginn_admin/content',$data);
+					$this->load->view('loginn_admin/footer',$data);
 				}
 			}
 		}else{
@@ -234,9 +234,9 @@ class User_Authentication_admin extends CI_Controller
 					'error_message' => '操作時間逾時，請重新操作。'
 					);
 			$data['title'] = "CI實作會員系統後台"; 
-			$this->load->view('loginn/header', $data);
-			$this->load->view('loginn/content',$data);
-			$this->load->view('loginn/footer',$data);			
+			$this->load->view('loginn_admin/header', $data);
+			$this->load->view('loginn_admin/content',$data);
+			$this->load->view('loginn_admin/footer',$data);			
 		}	
 	}
 

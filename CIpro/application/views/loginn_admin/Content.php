@@ -2,7 +2,7 @@
   <header>
     <div class="row">
       <div class="col s9">
-        <h4 class="center">登入資訊</h4>
+        <h4 class="center">後台登入資訊</h4>
       </div>
     </div>
   </header>
