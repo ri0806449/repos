@@ -274,6 +274,16 @@ class User_Authentication_admin extends CI_Controller
 			$this->load->view('loginn_admin/footer',$data);				
 		}
 	
+	}
+
+	//刪除使用者
+	public function delete_user()
+	{
+		//得到所傳入的id
+		$id = $this->input->post('id');		
+		//傳到model進行刪除的動作
+		$this->member_model->delete_user($id);
+
 	}	
 
 

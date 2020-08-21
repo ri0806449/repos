@@ -49,6 +49,28 @@
 	    		});
 	    	});
 
+
+	    	//點擊刪除鍵時進行刪除動作
+	    	$('.delete_user').click(function(){
+	    		var id = $(this).data('id');
+	    		this_tr = $(this).parent().parent().parent().parent();
+	    		var c = confirm("是否確定要刪除？");
+	    		if (c) {
+					$.ajax({
+						type: "POST",
+						url: '<?= base_url() ?>index.php/user_authentication_admin/delete_user',
+						data: {
+							id: id
+						},
+		    			success: function(response)
+		    			{
+		    				alert("刪除成功，請按確認！");
+		    				this_tr.fadeOut();
+		    			}					
+					})
+	    		}
+	    	})
+
 		  });
 	 </script>
   	 <footer class = "page-footer">

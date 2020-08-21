@@ -6,10 +6,10 @@
 	</header>
 	<main>
 		<div class="row">
-				<div class="col s4">
-					<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password"><i class="material-icons right">edit</i>修改後台密碼</a>
-				</div>		
-			</div>
+			<div class="col s4">
+				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password_admin"><i class="material-icons right">edit</i>修改後台密碼</a>
+			</div>		
+		</div>
 			<!--以下以表格條列所有會員資料 -->
 			<div class="row">
 				<div class="col s9 offset-s1">
@@ -20,6 +20,7 @@
 							<th>email</th>
 							<th>性別</th>
 							<th>興趣</th>
+							<th>刪除</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -49,6 +50,13 @@
 							<td>
 								<span class="edit"><?= $user[$key]['hobby'];  ?></span>
 								<input type="text" class="txtedit" data-id= '<?= $user[$key]['id']  ?>' data-field= 'hobby' id= 'nametxt_<?= $user[$key]['id'] ?>' value= '<?= $user[$key]['hobby'] ?>'>
+							</td>
+							<td>
+								<div class="row">
+									<div class="col s12">
+										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $user[$key]['id']  ?>'><i class="material-icons right">delete</i>刪除</a>
+									</div>		
+								</div>								
 							</td>
 						</tr>
 						<?php endforeach; ?>

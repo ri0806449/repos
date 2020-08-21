@@ -25,4 +25,16 @@
 		   $this->db->update('user',$data);
 
 		}
+
+		public function delete_user($id)
+		{
+			$this->db->where('id',$id);
+			$this->db->delete('user');
+			$affected = $this->db->affected_rows();
+			if ($affected > 0) {
+				return true;
+			}else{
+				return false;
+			}
+		}
 	}
