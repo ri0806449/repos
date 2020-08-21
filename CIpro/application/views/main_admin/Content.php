@@ -6,10 +6,14 @@
 	</header>
 	<main>
 		<div class="row">
+			<div class="col s2">
+				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password"><i class="material-icons right">edit</i>修改後台密碼</a>
+			</div>	
 			<div class="col s4">
-				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password_admin"><i class="material-icons right">edit</i>修改後台密碼</a>
-			</div>		
+				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="add_user"><i class="material-icons right">edit</i>新增會員資料</a>
+			</div>						
 		</div>
+	
 			<!--以下以表格條列所有會員資料 -->
 			<div class="row">
 				<div class="col s9 offset-s1">

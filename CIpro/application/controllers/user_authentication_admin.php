@@ -284,6 +284,24 @@ class User_Authentication_admin extends CI_Controller
 		//傳到model進行刪除的動作
 		$this->member_model->delete_user($id);
 
+	}
+
+	public function add_user()
+	{
+		if(isset($this->session->userdata['logged_in_admin'])){
+			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
+			$member_data['title'] = "CI實作會員系統後台";
+			//取得所有會員資料
+			$member_data['user'] = $this->member_model->get_member_data();
+			$this->load->view('add_user_admin/header',$member_data);
+			$this->load->view('add_user_admin/content',$member_data);
+			$this->load->view('add_user_admin/footer',$member_data);
+		}else{
+			$data['title'] = "CI實作會員系統後台"; 
+			$this->load->view('loginn_admin/header', $data);
+			$this->load->view('loginn_admin/content',$data);
+			$this->load->view('loginn_admin/footer',$data);
+		}	
 	}	
 
 
