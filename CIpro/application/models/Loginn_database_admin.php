@@ -138,7 +138,7 @@
 
 			//將新密碼 update進資料庫
  			$this->db->where('id', $session_data['id']);
- 			$this->db->update('user', $new_password);
+ 			$this->db->update('admin', $new_password);
  			$affected = $this->db->affected_rows();
  			if ($affected > 0) {
  				//更改成功

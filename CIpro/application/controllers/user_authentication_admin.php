@@ -249,9 +249,9 @@ class User_Authentication_admin extends CI_Controller
 			if ($this->form_validation->run('reset_password') == FALSE) {
 				//密碼驗證失敗，重新導入重設密碼頁面
 				$session_data['title'] = "CI實作會員系統後台";
-				$this->load->view('want_to_reset_password/header',$session_data);
-				$this->load->view('want_to_reset_password/content',$session_data);
-				$this->load->view('want_to_reset_password/footer',$session_data);
+				$this->load->view('want_to_reset_password_admin/header',$session_data);
+				$this->load->view('want_to_reset_password_admin/content',$session_data);
+				$this->load->view('want_to_reset_password_admin/footer',$session_data);
 			}else{
 				//密碼通過驗證，將密碼寫入資料庫，同時導向登入頁面
 				
@@ -269,9 +269,9 @@ class User_Authentication_admin extends CI_Controller
 			}			
 		}else{
 			$data['title'] = "CI實作會員系統後台"; 
-			$this->load->view('loginn/header', $data);
-			$this->load->view('loginn/content',$data);
-			$this->load->view('loginn/footer',$data);				
+			$this->load->view('loginn_admin/header', $data);
+			$this->load->view('loginn_admin/content',$data);
+			$this->load->view('loginn_admin/footer',$data);				
 		}
 	
 	}	
