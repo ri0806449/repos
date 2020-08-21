@@ -30,6 +30,14 @@
 	                </div> 				  						
 				</fieldset>
 			</form>
+			<div class="row">
+	            <div class="col s8 offset-s2">
+	                <button class="btn-large waves-effect waves-light red lighten-3 return" id="user_login_process" href="user_login_process">
+	                  回上一頁
+	                  <i class="material-icons right">keyboard_return</i>
+	                </button>	
+	          	</div>				
+			</div>
 		</div>
 	</main>
 

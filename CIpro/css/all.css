@@ -67,3 +67,9 @@ a#logout.waves-effect.waves-light.btn-large.user_logout
 {
   margin-bottom: 200px;
 }
+
+/*修改回上一頁按鍵的外觀*/
+button.return
+{
+  margin-top: 50px;
+}

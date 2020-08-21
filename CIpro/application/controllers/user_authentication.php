@@ -312,8 +312,6 @@ class User_Authentication extends CI_Controller
 	//在主頁中重設密碼
 	public function want_to_reset_password()
 	{	
-		//在這個環節用不到token，定一一下空值避免reset_password/content.php的網址出問題
-		$token_varify='';
 		if (isset($this->session->userdata['logged_in'])) {
 			$session_data = $this->session->userdata['logged_in'];
 			//進行更改密碼的環節，先密碼格式驗證
