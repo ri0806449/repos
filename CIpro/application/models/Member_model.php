@@ -16,4 +16,13 @@
 		   $this->db->where('id',$id);
 		   $this->db->update('user',$data);
 		}
+
+		public function update_user_admin($id,$field,$value)
+		{
+		   //更新資料
+		   $data=array($field => $value);
+		   $this->db->where('id',$id);
+		   $this->db->update('user',$data);
+
+		}
 	}
