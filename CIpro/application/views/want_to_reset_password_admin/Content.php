@@ -4,7 +4,7 @@
 		<div class="row">
 			<?php 
 				$attributes = array('class'=>'col s8 offset-s2 reg');
-            	echo form_open("user_authentication_admin/want_to_reset_password", $attributes);
+            	echo form_open("admin/setting/want_to_reset_password", $attributes);
 			?>
 				<fieldset>
 					<legend><h5>忘記密碼——重新設定密碼</h5></legend>
@@ -32,7 +32,7 @@
 			</form>
 			<div class="row">
 	            <div class="col s8 offset-s2">
-	                <button class="btn-large waves-effect waves-light red lighten-3 return" id="user_login_process" href="user_login_process">
+	                <button class="btn-large waves-effect waves-light red lighten-3 return" onclick="location.href='index'">
 	                  回上一頁
 	                  <i class="material-icons right">keyboard_return</i>
 	                </button>	

@@ -4,7 +4,7 @@
 		<div class="row">
 			<?php 
 				$attributes = array('class'=>'col s8 offset-s2 reg');
-            	echo form_open('user_authentication_admin/forgot_password', $attributes);
+            	echo form_open('admin/forget/forgot_password', $attributes);
 			?>
 				<fieldset>
 					<legend><h5>忘記密碼——填寫註冊email</h5></legend>

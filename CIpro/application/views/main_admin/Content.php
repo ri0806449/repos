@@ -14,10 +14,10 @@
 		</div>
 		<div class="row">
 			<div class="col s2">
-				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password"><i class="material-icons right">edit</i>修改後台密碼</a>
+				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="../setting/want_to_reset_password"><i class="material-icons right">edit</i>修改後台密碼</a>
 			</div>	
 			<div class="col s4">
-				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="add_user"><i class="material-icons right">edit</i>新增會員資料</a>
+				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="../setting/add_user"><i class="material-icons right">edit</i>新增會員資料</a>
 			</div>						
 		</div>
 	
@@ -77,7 +77,7 @@
 			</div>
 			<div class="row">
 				<div class="col s12 center">
-					<a class="waves-effect waves-light btn-large user_logout" id="logout_admin" href="logout_admin"><i class="material-icons right">cloud</i>登出</a>
+					<a class="waves-effect waves-light btn-large user_logout" id="logout_admin" href="../loginn/logout_admin"><i class="material-icons right">cloud</i>登出</a>
 				</div>
 			</div>
 	</main>

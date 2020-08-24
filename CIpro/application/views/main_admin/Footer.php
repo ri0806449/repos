@@ -29,7 +29,7 @@
 	    		//傳送AJAX請求
 	    		$.ajax(
 	    		{
-	    			url: '<?= base_url() ?>index.php/user_authentication_admin/update_user_admin',
+	    			url: '<?= base_url() ?>index.php/admin/setting/update_user_admin',
 	    			type: 'post',
 	    			data:
 	    			{
@@ -58,7 +58,7 @@
 	    		if (c) {
 					$.ajax({
 						type: "POST",
-						url: '<?= base_url() ?>index.php/user_authentication_admin/delete_user',
+						url: '<?= base_url() ?>index.php/admin/setting/delete_user',
 						data: {
 							id: id
 						},
