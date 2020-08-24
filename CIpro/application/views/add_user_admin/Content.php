@@ -17,7 +17,7 @@
 						<h4>後台——新增會員資料</h4>
 					</legend>
 					<div class="row">
-						<div class="col s12">
+						<div class="col s10 offset-s1">
 							<table class="centered highlight">
 								<thead>
 								<tr>
@@ -27,13 +27,6 @@
 									<th width="250">email</th>
 									<th>性別</th>
 									<th width="200">興趣</th>
-									<th width="150">
-										<div class="row">
-											<div class="col s12">
-												<a class="waves-effect waves-light btn-large add_row" ><i class="material-icons right">library_add</i>新增欄位</a>
-											</div>		
-										</div>	
-									</th>
 								</tr>
 								</thead>
 								<tbody>
