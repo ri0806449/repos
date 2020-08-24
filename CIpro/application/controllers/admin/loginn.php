@@ -1,7 +1,7 @@
 <?php 
 //創造一個session
 //session_start();當已經$this->load->library('session') 這一行就幫你做好session_start的動作了
-class loginn extends CI_Controller
+class Loginn extends CI_Controller
 {
 	public function __construct()
 	{

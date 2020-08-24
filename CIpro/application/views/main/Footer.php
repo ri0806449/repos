@@ -26,11 +26,10 @@
 	    		var value = $(this).val();
 	    		//指派至元素變數
 	    		var element = this;
-
 	    		//傳送AJAX請求
 	    		$.ajax(
 	    		{
-	    			url: '<?= base_url() ?>index.php/user_authentication/update_user',
+	    			url: '<?= base_url() ?>index.php/member/setting/update_user',
 	    			type: 'post',
 	    			data:
 	    			{

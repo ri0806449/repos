@@ -5,7 +5,7 @@
         <!--把<form class="col s12 reg">換成form_open方式打開，產生 action 的時候， 是基於設定文件來產生 URL 的，這使得您的應用在更改 URL 時更具移植性-->
          <?php 
             $attributes = array('class'=>'col s8 offset-s2 reg');
-            echo form_open('user_authentication/new_user_registration', $attributes); 
+            echo form_open('member/setting/new_user_registration', $attributes); 
           ?>
          <?php
           //echo驗證錯誤

@@ -4,7 +4,7 @@
 		<div class="row">
 			<?php 
 				$attributes = array('class'=>'col s8 offset-s2 reg');
-            	echo form_open("user_authentication/reset_password/{$token_varify}", $attributes);
+            	echo form_open("member/forget/reset_password/{$token_varify}", $attributes);
 			?>
 				<fieldset>
 					<legend><h5>忘記密碼——重新設定密碼</h5></legend>

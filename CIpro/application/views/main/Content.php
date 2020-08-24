@@ -10,7 +10,7 @@
 			  <a class="wave-effect intro wave-light btn-large" onclick="$('.tap-target').tapTarget('open')">自我介紹</a>
 		</div>
 		<div class="col s4">
-			<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password"><i class="material-icons right">edit</i>修改密碼</a>
+			<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="../setting/want_to_reset_password"><i class="material-icons right">edit</i>修改密碼</a>
 		</div>		
 	</div>		
 	  <!-- Tap Target Structure -->
