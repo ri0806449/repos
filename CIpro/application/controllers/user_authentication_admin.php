@@ -18,12 +18,21 @@ class User_Authentication_admin extends CI_Controller
 		$this->load->model('member_model');
 		//載入email資源
 		$this->load->library('email');
+		//載入分頁資源
+		$this->load->library('pagination');
 	}
 
 	//登入主頁的相關資訊
 	public function index()
 	{	
 		if(isset($this->session->userdata['logged_in_admin'])){
+			$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/user_authentication_admin/index';
+			$config['total_rows'] = 3;
+			$config['per_page'] = 1;
+
+			$this->pagination->initialize($config);
+
+			echo $this->pagination->create_links();
 			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 			$member_data['title'] = "CI實作會員系統後台";
 			//取得所有會員資料
@@ -42,7 +51,7 @@ class User_Authentication_admin extends CI_Controller
 
 
 	//自己設定的回調函數
-	public function username_check($str)//$str即寫入的值
+	protected function username_check($str)//$str即寫入的值
 	{
 		if (strpos($str,'fuck') !== false) {//用strpos判斷字串中是否包含特定文字
 			$this->form_validation->set_message('username_check',"帳號中請勿包含不雅文字");
