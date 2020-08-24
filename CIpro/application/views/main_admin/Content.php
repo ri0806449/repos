@@ -5,6 +5,13 @@
 		</h1>	
 	</header>
 	<main>
+		<div class='error_msg'>
+			<?php 
+		          if (isset($message_display)) {
+		          echo $message_display;
+		          }
+			 ?>
+		</div>
 		<div class="row">
 			<div class="col s2">
 				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="want_to_reset_password"><i class="material-icons right">edit</i>修改後台密碼</a>

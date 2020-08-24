@@ -289,13 +289,45 @@ class User_Authentication_admin extends CI_Controller
 	public function add_user()
 	{
 		if(isset($this->session->userdata['logged_in_admin'])){
-			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
-			$member_data['title'] = "CI實作會員系統後台";
-			//取得所有會員資料
-			$member_data['user'] = $this->member_model->get_member_data();
-			$this->load->view('add_user_admin/header',$member_data);
-			$this->load->view('add_user_admin/content',$member_data);
-			$this->load->view('add_user_admin/footer',$member_data);
+			if ($this->form_validation->run('register') == FALSE) {
+				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
+				$member_data['title'] = "CI實作會員系統後台";
+				//取得所有會員資料
+				$member_data['user'] = $this->member_model->get_member_data();
+				$this->load->view('add_user_admin/header',$member_data);
+				$this->load->view('add_user_admin/content',$member_data);
+				$this->load->view('add_user_admin/footer',$member_data);
+			}else{
+				$data = array
+				(
+					'username' => $this->input->post('username'),
+					'password' => md5($this->input->post('password')),
+					'email' => $this->input->post('email'),
+					'gender' => $this->input->post('gender'),
+					'hobby' => $this->input->post('hobby')
+				);
+				$result = $this->loginn_database_admin->registration_insert($data);
+				if($result == TRUE){
+					$member_data['message_display'] = '新增成功！';
+					$member_data['admin'] = $this->session->userdata['logged_in_admin'];
+					$member_data['title'] = "CI實作會員系統後台";
+					//取得所有會員資料
+					$member_data['user'] = $this->member_model->get_member_data();
+					$this->load->view('main_admin/header',$member_data);
+					$this->load->view('main_admin/content',$member_data);
+					$this->load->view('main_admin/footer',$member_data);
+				}
+				else{
+					$member_data['error_message'] = '新增失敗，請再試一次。';
+					$member_data['admin'] = $this->session->userdata['logged_in_admin'];
+					$member_data['title'] = "CI實作會員系統後台";
+					//取得所有會員資料
+					$member_data['user'] = $this->member_model->get_member_data();
+					$this->load->view('add_user_admin/header',$member_data);
+					$this->load->view('add_user_admin/content',$member_data);
+					$this->load->view('add_user_admin/footer',$member_data);
+				}
+			}
 		}else{
 			$data['title'] = "CI實作會員系統後台"; 
 			$this->load->view('loginn_admin/header', $data);

@@ -1,7 +1,24 @@
 <?php
 	class Loginn_Database_admin extends CI_Model
 	{
+		//插入資料庫裡的註冊資料
+		public function registration_insert($data)
+		{	
+			//query得出使用者的帳號是否在資料庫中
 
+			$query =$this->db->get_where('user',
+				array('username'=>$data['username']),1);
+			if($query->num_rows() == 0){
+				//query得出資料庫裡的其他資料
+				$this->db->insert('user',$data);
+				if ($this->db->affected_rows() > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		
 		//用帳號密碼讀取資料
 		public function login($data)
 		{	

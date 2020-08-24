@@ -8,7 +8,7 @@
             echo form_open('user_authentication/new_user_registration', $attributes); 
           ?>
          <?php
-          //echo驗證錯誤（但不確定為什麼要放在這裡，等畫面出來後再來看看）
+          //echo驗證錯誤
           echo "<div class='error_msg'>";
           if (isset($error_message)) {
           echo $error_message;
