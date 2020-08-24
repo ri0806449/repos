@@ -28,6 +28,7 @@ class User_Authentication_admin extends CI_Controller
 			$member_data['title'] = "CI實作會員系統後台";
 			//取得所有會員資料
 			$member_data['user'] = $this->member_model->get_member_data();
+
 			$this->load->view('main_admin/header',$member_data);
 			$this->load->view('main_admin/content',$member_data);
 			$this->load->view('main_admin/footer',$member_data);

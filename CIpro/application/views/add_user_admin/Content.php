@@ -76,7 +76,7 @@
 						</div>
 					</div>
 	                <div class="row">
-	                  <div class="col s12 offset-s9">
+	                  <div class="col s3 offset-s9">
 	                    <button class="btn-large waves-effect waves-light" type="submit" value="submit">
 	                      送出
 	                      <i class="material-icons right">check</i>
@@ -85,6 +85,14 @@
 	                </div>  					
 				</fieldset>				
 			</form>
+			<div class="row">
+	            <div class="col s8 offset-s2">
+	                <button class="btn-large waves-effect waves-light red lighten-3 return" id="user_login_process" onclick="location.href='index'">
+	                  回上一頁
+	                  <i class="material-icons right">keyboard_return</i>
+	                </button>	
+	          	</div>				
+			</div>			
 		</div>
 	</main>
 	
