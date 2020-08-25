@@ -13,7 +13,7 @@ class Loginn extends CI_Controller
 		//載入session輔助函式
 		$this->load->library('session');
 		//載入資料庫model
-		$this->load->model('loginn_database');
+		$this->load->model('member_model');
 		//載入email資源
 		$this->load->library('email');
 	}
@@ -73,11 +73,11 @@ class Loginn extends CI_Controller
 					'username' => $this->input->post('login_user_username'),
 					'password' => md5($this->input->post('login_user_password'))
 						);//先將使用者輸入的帳密存到$data陣列中
-			$result = $this->loginn_database->login($data);//用login function確認這組帳密是否在資料庫能撈出一筆資料
+			$result = $this->member_model->login($data);//用login function確認這組帳密是否在資料庫能撈出一筆資料
 			if ($result == TRUE) {
 			//可以撈出一筆資料代表帳密正確，將username以read_user_information function去撈出該使用者的其他資料
 				$username = $this->input->post('login_user_username');
-				$result = $this->loginn_database->read_user_information($username);
+				$result = $this->member_model->read_user_information($username);
 			if ($result != false) {
 				$session_data = array(
 									'id' => $result[0]->id,

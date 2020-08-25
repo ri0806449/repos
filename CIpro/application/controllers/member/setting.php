@@ -13,7 +13,7 @@ class Setting extends CI_Controller
 		//載入session輔助函式
 		$this->load->library('session');
 		//載入資料庫model
-		$this->load->model('loginn_database');
+		$this->load->model('member_model');
 		//載入email資源
 		$this->load->library('email');
 	}
@@ -64,7 +64,7 @@ class Setting extends CI_Controller
 				'gender' => $this->input->post('gender'),
 				'hobby' => $this->input->post('hobby')
 			);
-			$result = $this->loginn_database->registration_insert($data);
+			$result = $this->member_model->registration_insert($data);
 			if($result == TRUE){
 				$data['message_display'] = '註冊成功！請輸入帳號密碼進行登入。';
 				$data['title'] = "CI實作會員系統"; 
@@ -103,9 +103,9 @@ class Setting extends CI_Controller
 	     $value = $this->input->post('value');
 
 	     //更新資料
-	     $this->loginn_database->update_user($id,$field,$value);
+	     $this->member_model->update_user($id,$field,$value);
 	     //更新session資料(該使用者全部資料更新一波)
-	     $result = $this->loginn_database->update_info_for_session($id);
+	     $result = $this->member_model->update_info_for_session($id);
 			if ($result != false) {
 				$new_session_data = array(
 									'id' => $result[0]->id,
@@ -145,7 +145,7 @@ class Setting extends CI_Controller
 				$new_password = array(
 									'password' => md5($this->input->post('reset_password'))
 									);
-				if ($this->loginn_database->want_to_change_password($session_data,$new_password)) {
+				if ($this->member_model->want_to_change_password($session_data,$new_password)) {
 					//密碼已修改，回主頁
 					echo '<script>alert("密碼修改成功囉超級恭喜～"); location.href="../loginn/user_login_process";</script>';
 				}else{

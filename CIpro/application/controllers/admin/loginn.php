@@ -13,9 +13,7 @@ class Loginn extends CI_Controller
 		//載入session輔助函式
 		$this->load->library('session');
 		//載入資料庫model
-		$this->load->model('loginn_database_admin');
-		//載入資料庫model，取得編輯資料
-		$this->load->model('member_model');
+		$this->load->model('admin_model');
 		//載入email資源
 		$this->load->library('email');
 		//載入分頁資源
@@ -27,13 +25,18 @@ class Loginn extends CI_Controller
 	{	
 		if(isset($this->session->userdata['logged_in_admin'])){
 
+			$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/user_login_process';
+			$config['total_rows'] = 28;
+			$config['per_page'] = 15;
+
 			$this->pagination->initialize($config);
 
 			echo $this->pagination->create_links();
+
 			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 			$member_data['title'] = "CI實作會員系統後台";
 			//取得所有會員資料
-			$member_data['user'] = $this->member_model->get_member_data();
+			$member_data['user'] = $this->admin_model->get_member_data();
 
 			$this->load->view('main_admin/header',$member_data);
 			$this->load->view('main_admin/content',$member_data);
@@ -65,10 +68,18 @@ class Loginn extends CI_Controller
 		if ($this->form_validation->run('login_admin') == FALSE) {
 			//驗證沒過有分兩種，一種是沒有填但是本身已是登入狀態，一種是第一次進到登入頁面或帳密輸入錯誤，所以以下是這部分的判斷
 			if(isset($this->session->userdata['logged_in_admin'])){
+
+				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/user_login_process';
+				$config['total_rows'] = 200;
+				$config['per_page'] = 15;
+
+				$this->pagination->initialize($config);
+
+				echo $this->pagination->create_links();
 				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 				$member_data['title'] = "CI實作會員系統後台";
 				//取得所有會員資料
-				$member_data['user'] = $this->member_model->get_member_data();
+				$member_data['user'] = $this->admin_model->get_member_data();
 				$this->load->view('main_admin/header',$member_data);
 				$this->load->view('main_admin/content',$member_data);
 				$this->load->view('main_admin/footer',$member_data);
@@ -84,11 +95,11 @@ class Loginn extends CI_Controller
 					'username' => $this->input->post('login_admin_username'),
 					'password' => md5($this->input->post('login_admin_password'))
 						);//先將使用者輸入的帳密存到$data陣列中
-			$result = $this->loginn_database_admin->login($data);//用login function確認這組帳密是否在資料庫能撈出一筆資料
+			$result = $this->admin_model->login($data);//用login function確認這組帳密是否在資料庫能撈出一筆資料
 			if ($result == TRUE) {
 			//可以撈出一筆資料代表帳密正確，將username以read_user_in_adminformation function去撈出該使用者的其他資料
 				$username = $this->input->post('login_admin_username');
-				$result = $this->loginn_database_admin->read_user_information($username);
+				$result = $this->admin_model->read_user_information($username);
 			if ($result != false) {
 				$session_data = array(
 									'id' => $result[0]->id,
@@ -102,7 +113,7 @@ class Loginn extends CI_Controller
 				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 				$member_data['title'] = "CI實作會員系統後台";
 				//取得所有會員資料
-				$member_data['user'] = $this->member_model->get_member_data();
+				$member_data['user'] = $this->admin_model->get_member_data();
 				$this->load->view('main_admin/header',$member_data);
 				$this->load->view('main_admin/content',$member_data);
 				$this->load->view('main_admin/footer',$member_data);}

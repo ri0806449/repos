@@ -13,7 +13,7 @@ class Setting extends CI_Controller
 		//載入session輔助函式
 		$this->load->library('session');
 		//載入資料庫model
-		$this->load->model('loginn_database_admin');
+		$this->load->model('admin_model');
 		//載入email資源
 		$this->load->library('email');
 		//載入分頁資源
@@ -27,7 +27,7 @@ class Setting extends CI_Controller
 			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 			$member_data['title'] = "CI實作會員系統後台";
 			//取得所有會員資料
-			$member_data['user'] = $this->loginn_database_admin->get_member_data();
+			$member_data['user'] = $this->admin_model->get_member_data();
 
 			$this->load->view('main_admin/header',$member_data);
 			$this->load->view('main_admin/content',$member_data);
@@ -51,7 +51,7 @@ class Setting extends CI_Controller
 	     $value = $this->input->post('value');
 
 	     //更新資料
-	     $this->loginn_database_admin->update_user_admin($id,$field,$value);
+	     $this->admin_model->update_user_admin($id,$field,$value);
 	     //這是什麼啦 A：好啦跟你說，這個主要是運用在js後續判斷是否傳送成功，傳1代表成功傳送，傻傻的～
 	     echo 1;
 	     exit;
@@ -78,7 +78,7 @@ class Setting extends CI_Controller
 				$new_password = array(
 									'password' => md5($this->input->post('reset_password'))
 									);
-				if ($this->loginn_database_admin->want_to_change_password($session_data,$new_password)) {
+				if ($this->admin_model->want_to_change_password($session_data,$new_password)) {
 					//密碼已修改，回主頁
 					echo '<script>alert("密碼修改成功囉超級恭喜～"); location.href="index";</script>';
 				}else{
@@ -101,7 +101,7 @@ class Setting extends CI_Controller
 		//得到所傳入的id
 		$id = $this->input->post('id');		
 		//傳到model進行刪除的動作
-		$this->loginn_database_admin->delete_user($id);
+		$this->admin_model->delete_user($id);
 
 	}
 
@@ -125,7 +125,7 @@ class Setting extends CI_Controller
 				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 				$member_data['title'] = "CI實作會員系統後台";
 				//取得所有會員資料
-				$member_data['user'] = $this->loginn_database_admin->get_member_data();
+				$member_data['user'] = $this->admin_model->get_member_data();
 				$this->load->view('add_user_admin/header',$member_data);
 				$this->load->view('add_user_admin/content',$member_data);
 				$this->load->view('add_user_admin/footer',$member_data);
@@ -138,13 +138,13 @@ class Setting extends CI_Controller
 					'gender' => $this->input->post('gender'),
 					'hobby' => $this->input->post('hobby')
 				);
-				$result = $this->loginn_database_admin->registration_insert($data);
+				$result = $this->admin_model->registration_insert($data);
 				if($result == TRUE){
 					$member_data['message_display'] = '新增成功！';
 					$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 					$member_data['title'] = "CI實作會員系統後台";
 					//取得所有會員資料
-					$member_data['user'] = $this->loginn_database_admin->get_member_data();
+					$member_data['user'] = $this->admin_model->get_member_data();
 					$this->load->view('main_admin/header',$member_data);
 					$this->load->view('main_admin/content',$member_data);
 					$this->load->view('main_admin/footer',$member_data);
@@ -154,7 +154,7 @@ class Setting extends CI_Controller
 					$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 					$member_data['title'] = "CI實作會員系統後台";
 					//取得所有會員資料
-					$member_data['user'] = $this->loginn_database_admin->get_member_data();
+					$member_data['user'] = $this->admin_model->get_member_data();
 					$this->load->view('add_user_admin/header',$member_data);
 					$this->load->view('add_user_admin/content',$member_data);
 					$this->load->view('add_user_admin/footer',$member_data);
