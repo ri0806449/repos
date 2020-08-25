@@ -76,12 +76,12 @@
 	    	//點擊搜尋欄位時隱藏整個table
 	    	$('.search_stuff').click(function(){
 	    		$('.all_table').fadeOut();
-	    		$('.search_table').fadeIn();
+	    		$('#search_table').fadeIn();
 	    	});
 
 	    	//離開搜尋欄位時再次顯示整個table
 	    	$('.search_stuff').focusout(function(){
-	    		$('.search_table').fadeOut();
+	    		$('#search_table').fadeOut();
 	    		$('.all_table').fadeIn();
 	    	});
 
@@ -92,7 +92,11 @@
 	    				type:'POST',
 	    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
 	    				data: {'n': $(this).val},
-	    				dataType:"html"
+	    				dataType:"html",
+	                    success: function (data) {
+                        //$('#search_table').html(data);
+                        console.log(data);
+                   		 }
 	    			})
 	    		}
 	    	})

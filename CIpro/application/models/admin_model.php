@@ -192,7 +192,8 @@
 		{
 			$this->db->get('user');
 			$query = $this->db->like('username', $part_username);
-			return $query->result();
+			$row = $query->result_array();
+			return $row;
 		}
 
 		public function get_member_data()

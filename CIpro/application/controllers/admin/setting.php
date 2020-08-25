@@ -98,6 +98,27 @@ class Setting extends CI_Controller
 		$part_username = $this->input->post('n');
 		//傳到model進行搜尋的動作
 		$result = $this->admin_model->search_username($part_username);
+		return $result;
+	}
+
+	public function e()
+	{
+		//傳入所得到的資料
+		$part_username = "ri080";
+		//傳到model進行搜尋的動作
+			$this->db->select('user')->like('username', $part_username);
+			//$row = $query->result_array();
+			//$row = $query->row_array();
+/*			foreach ($query->result_array() as $row)
+			{
+			        echo $row['username'];
+			        echo $row['email'];
+			}*/
+			var_dump($query);
+
+		/*	$this->db->get('user');
+			$row = $query->result_array();
+			var_dump($row);*/
 	}
 	
 
