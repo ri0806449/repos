@@ -68,7 +68,7 @@ class Loginn extends CI_Controller
 		if ($this->form_validation->run('login_admin') == FALSE) {
 			//驗證沒過有分兩種，一種是沒有填但是本身已是登入狀態，一種是第一次進到登入頁面或帳密輸入錯誤，所以以下是這部分的判斷
 			if(isset($this->session->userdata['logged_in_admin'])){
-
+				//分頁功能
 				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/index';
 				$config['total_rows'] = $this->admin_model->get_count();
 				$config['per_page'] = 10;
