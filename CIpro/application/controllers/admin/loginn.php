@@ -67,30 +67,8 @@ class Loginn extends CI_Controller
 
 		if ($this->form_validation->run('login_admin') == FALSE) {
 			//驗證沒過有分兩種，一種是沒有填但是本身已是登入狀態，一種是第一次進到登入頁面或帳密輸入錯誤，所以以下是這部分的判斷
-			if(isset($this->session->userdata['logged_in_admin'])){
-				//分頁功能
-				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/index';
-				$config['total_rows'] = $this->admin_model->get_count();
-				$config['per_page'] = 10;
-
-				$this->pagination->initialize($config);
-				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
-
-				$member_data['links'] = $this->pagination->create_links();
-				$member_data['user_page'] = $this->admin_model->page_get_user($config["per_page"], $page);
-				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
-				$member_data['title'] = "CI實作會員系統後台";
-				//取得所有會員資料
-				$member_data['user'] = $this->admin_model->get_member_data();
-				$this->load->view('main_admin/header',$member_data);
-				$this->load->view('main_admin/content',$member_data);
-				$this->load->view('main_admin/footer',$member_data);
-			}else{
-				$data['title'] = "CI實作會員系統後台"; 
-				$this->load->view('loginn_admin/header', $data);
-				$this->load->view('loginn_admin/content',$data);
-				$this->load->view('loginn_admin/footer',$data);
-			}
+			//導向同一個網址，避免寫太多次一樣的程式碼
+			header('Location: http://[::1]/repos/CIpro/index.php/admin/loginn/index');
 		} else {
 			//以下則是第一次輸入帳密或重新輸入帳密時要做出的反應
 			$data = array(
