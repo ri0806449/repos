@@ -188,6 +188,13 @@
 			}
 		}
 
+		public function search_username($part_username)
+		{
+			$this->db->get('user');
+			$query = $this->db->like('username', $part_username);
+			return $query->result();
+		}
+
 		public function get_member_data()
 		{
 			//取得所有會員資料

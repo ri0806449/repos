@@ -92,6 +92,15 @@ class Setting extends CI_Controller
 
 	}
 
+	public function search_username()
+	{
+		//傳入所得到的資料
+		$part_username = $this->input->post('n');
+		//傳到model進行搜尋的動作
+		$result = $this->admin_model->search_username($part_username);
+	}
+	
+
 	//自己設定的回調函數
 	public function username_check($str)//$str即寫入的值
 	{
@@ -103,6 +112,7 @@ class Setting extends CI_Controller
 			return TRUE;
 		}
 	}
+
 
 
 	public function add_user()

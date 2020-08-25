@@ -3,6 +3,8 @@
 
 	 <script type="text/javascript">
 	 	  $(document).ready(function(){
+	 	  	//搜尋結果先隱藏起來
+	 	  	$('.search_table').hide();
 	 	  	//更新欄位必須先藏起來
 	 	  	$('.txtedit').hide();
 		    //使用者在更改資料所需要的js
@@ -71,6 +73,29 @@
 	    		}
 	    	});
 
+	    	//點擊搜尋欄位時隱藏整個table
+	    	$('.search_stuff').click(function(){
+	    		$('.all_table').fadeOut();
+	    		$('.search_table').fadeIn();
+	    	});
+
+	    	//離開搜尋欄位時再次顯示整個table
+	    	$('.search_stuff').focusout(function(){
+	    		$('.search_table').fadeOut();
+	    		$('.all_table').fadeIn();
+	    	});
+
+	    	//一但輸入後即開始進行動態搜尋
+	    	$("#search_stuff").keyup(function(){
+	    		if ($(this).val != "") {
+	    			$.ajax({
+	    				type:'POST',
+	    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
+	    				data: {'n': $(this).val},
+	    				dataType:"html"
+	    			})
+	    		}
+	    	})
 
 		  });
 	 </script>
