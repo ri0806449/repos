@@ -35,32 +35,32 @@
 						</tr>
 						</thead>
 						<tbody>
-						<?php foreach ($user as $key => $value):?>
+						<?php foreach ($user_page as $res):?>
 						<tr>
 							<td>
-								<span class="edit"><?= $user[$key]['username'];  ?></span>
-								<input type="text" class="txtedit" data-id= '<?= $user[$key]['id']  ?>' data-field= 'username' id= 'nametxt_<?= $user[$key]['id'] ?>' value= '<?= $user[$key]['username'] ?>'>
+								<span class="edit"><?= $res->username;  ?></span>
+								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'username' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->username ?>'>
 							</td>
 							<td>
-								<span class="edit"><?= $user[$key]['email'];  ?></span>
-								<input type="text" class="txtedit" data-id= '<?= $user[$key]['id']  ?>' data-field= 'email' id= 'nametxt_<?= $user[$key]['id'] ?>' value= '<?= $user[$key]['email'] ?>'>
+								<span class="edit"><?= $res->email;  ?></span>
+								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'email' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->email ?>'>
 							</td>
 							<td>
 								<span class="edit">
 								<?php 
-								if ($user[$key]['gender'] == 0){
+								if ($res->gender == 0){
 									echo "女孩紙";
 									}
-								elseif($user[$key]['gender'] == 1){
+								elseif($res->gender == 1){
 									echo "男孩紙";
 									}	
 								?>
 								</span>
-								<input type="text" class="txtedit" data-id= '<?= $user[$key]['id']  ?>' data-field= 'gender' id= 'nametxt_<?= $user[$key]['id'] ?>' value= '<?= $user[$key]['gender'] ?>'>
+								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'gender' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->gender ?>'>
 							</td>
 							<td>
-								<span class="edit"><?= $user[$key]['hobby'];  ?></span>
-								<input type="text" class="txtedit" data-id= '<?= $user[$key]['id']  ?>' data-field= 'hobby' id= 'nametxt_<?= $user[$key]['id'] ?>' value= '<?= $user[$key]['hobby'] ?>'>
+								<span class="edit"><?= $res->hobby;  ?></span>
+								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'hobby' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->hobby ?>'>
 							</td>
 							<td>
 								<div class="row">

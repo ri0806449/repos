@@ -24,6 +24,15 @@ class Forget extends CI_Controller
 	public function index()
 	{	
 		if(isset($this->session->userdata['logged_in_admin'])){
+			$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/forget/index';
+			$config['total_rows'] = $this->admin_model->get_count();
+			$config['per_page'] = 10;
+
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$member_data['links'] = $this->pagination->create_links();
+			$member_data['user_page'] = $this->admin_model->page_get_user($config["per_page"], $page);			
 			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 			$member_data['title'] = "CI實作會員系統後台";
 			//取得所有會員資料
