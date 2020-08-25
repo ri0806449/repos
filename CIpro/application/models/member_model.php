@@ -1,5 +1,5 @@
 <?php
-	class Loginn_Database extends CI_Model
+	class Member_model extends CI_Model
 	{
 		//插入資料庫裡的註冊資料
 		public function registration_insert($data)

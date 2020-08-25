@@ -1,5 +1,5 @@
 <?php
-	class Loginn_Database_admin extends CI_Model
+	class Admin_model extends CI_Model
 	{
 		//插入資料庫裡的註冊資料
 		public function registration_insert($data)
@@ -206,5 +206,18 @@
 							];
 			$this->db->where('token', $data['token_varify']);
  			$this->db->update('admin', $empty_token);
+		}
+
+		//取得資料表總筆數，用於分頁
+		public function get_count()
+		{
+			return $this->db->count_all("user");
+		}
+
+		//取得資料表特定筆數的資料，用於分頁
+		public function page_get_user($limit,$start)
+		{
+			$query = $this->db->get("user", $limit, $start);
+			return $query->result();
 		}
 	}

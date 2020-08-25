@@ -25,14 +25,6 @@ class Loginn extends CI_Controller
 	{	
 		if(isset($this->session->userdata['logged_in_admin'])){
 
-			$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/user_login_process';
-			$config['total_rows'] = 28;
-			$config['per_page'] = 15;
-
-			$this->pagination->initialize($config);
-
-			echo $this->pagination->create_links();
-
 			$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 			$member_data['title'] = "CI實作會員系統後台";
 			//取得所有會員資料
@@ -70,12 +62,14 @@ class Loginn extends CI_Controller
 			if(isset($this->session->userdata['logged_in_admin'])){
 
 				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/user_login_process';
-				$config['total_rows'] = 200;
-				$config['per_page'] = 15;
+				$config['total_rows'] = $this->admin_model->get_count();
+				$config['per_page'] = 10;
 
 				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
 
-				echo $this->pagination->create_links();
+				$member_data['links'] = $this->pagination->create_links();
+				$member_data['user_page'] = $this->admin_model->page_get_user($config["per_page"], $page);
 				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
 				$member_data['title'] = "CI實作會員系統後台";
 				//取得所有會員資料

@@ -76,6 +76,11 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col s3 offset-s5">
+					<div><?php echo $links; ?></div>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col s12 center">
 					<a class="waves-effect waves-light btn-large user_logout" id="logout_admin" href="../loginn/logout_admin"><i class="material-icons right">cloud</i>登出</a>
 				</div>
