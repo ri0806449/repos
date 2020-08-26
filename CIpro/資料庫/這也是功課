@@ -1,0 +1,7 @@
+1.index2 form get pagenation
+2.ajax搜尋改用一個function
+3.echo td 重複利用 array
+
+var result = {success: true, data: [], html: "<td></td>"};
+
+$('#block').html(result.html);

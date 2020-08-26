@@ -1,0 +1,28 @@
+後臺
+註冊完成後是登入狀態，導入個人資料頁
+token刪除
+密碼修改欄位
+註冊，登入（城市拆分）
+
+
+
+
+
+分頁 order by id 
+admin 新增查詢功能
+	帳號, email
+
+front
+	Register
+	Login
+	Setting
+	Forget
+
+admin
+	admin/Login
+	admin/Setting
+	admin/Member
+
+model
+	Member_model.php
+	Admin_model.php
