@@ -188,22 +188,6 @@
 			}
 		}
 
-		public function search_username($part_username)
-		{
-			$query = $this->db
-			->like('username', $part_username)
-			->get('user');
-			return $query->result();
-		}
-
-		public function search_email($part_email)
-		{
-			$query = $this->db
-			->like('email', $part_email)
-			->get('user');
-			return $query->result();
-		}
-
 		public function search_username_email($part_email,$part_username)
 		{
 			$query = $this->db

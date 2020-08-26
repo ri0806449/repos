@@ -92,53 +92,6 @@ class Setting extends CI_Controller
 
 	}
 
-	public function search_username()
-	{
-		//傳入所得到的資料
-		$part_username = $this->input->post('n');
-		//傳到model進行搜尋的動作
-		$result = $this->admin_model->search_username($part_username);
-		foreach($result as $row)
-		{
-			echo "<tr>";
-			echo "<td>".$row->username."</td>";
-			echo "<td>".$row->email."</td>";
-			echo "<td>".$row->gender."</td>";
-			echo "<td>".$row->hobby."</td>";
-			echo "<td>";
-			echo "<div class='row'>";
-			echo '<div class="col s12">';
-			echo '<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id='.$row->id.'><i class="material-icons right">delete</i>刪除</a>';
-			echo "</div>";
-		  	echo "</div>";
-			echo "</td>";
-			echo "</tr>";	
-		}
-	}
-
-	public function search_email()
-	{
-		//傳入所得到的資料
-		$part_email = $this->input->post('n');
-		//傳到model進行搜尋的動作
-		$result = $this->admin_model->search_email($part_email);
-		foreach($result as $row)
-		{
-			echo "<tr>";
-			echo "<td>".$row->username."</td>";
-			echo "<td>".$row->email."</td>";
-			echo "<td>".$row->gender."</td>";
-			echo "<td>".$row->hobby."</td>";
-			echo "<td>";
-			echo "<div class='row'>";
-			echo '<div class="col s12">';
-			echo '<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id='.$row->id.'><i class="material-icons right">delete</i>刪除</a>';
-			echo "</div>";
-		  	echo "</div>";
-			echo "</td>";
-			echo "</tr>";	
-		}
-	}
 
 	public function search_username_email()
 	{

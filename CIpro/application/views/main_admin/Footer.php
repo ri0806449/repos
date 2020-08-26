@@ -88,81 +88,39 @@
 	    		}
 	    	});
 
+	    	//不管兩個欄位都不是空值，都傳送值的函式
+	    	function get_info()
+	    	{
+    			$.ajax({
+    				type:'POST',
+    				url: '<?= base_url() ?>index.php/admin/setting/search_username_email',
+    				data: 
+    				{	
+    					'n': $("#search_username").val(),
+    					'm': $("#search_email").val()
+
+    				},
+    				dataType:"html",
+					success: function(data)
+						{
+					    	$('#tablee').html(data);
+					    }
+
+					});	 
+	    	}
+
 	    	//一但帳號輸入後即開始進行動態搜尋
 	    	$("#search_username").keyup(function(){
-	    		if ($("#search_username").val() != "") {
-	    			if ($("#search_email").val() != "") {
-	    				//兩個欄位都不是空值
-		    			$.ajax({
-		    				type:'POST',
-		    				url: '<?= base_url() ?>index.php/admin/setting/search_username_email',
-		    				data: 
-		    				{	
-		    					'n': $("#search_username").val(),
-		    					'm': $("#search_email").val()
-
-		    				},
-		    				dataType:"html",
-							success: function(data)
-								{
-							    	$('#tablee').html(data);
-							    }
-
-	    					});	    				
-	    			}else{
-	    				//email欄位是空值，帳號欄位不是空值
-		    			$.ajax({
-		    				type:'POST',
-		    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
-		    				data: {'n': $("#search_username").val()},
-		    				dataType:"html",
-							success: function(data)
-								{
-							    	$('#tablee').html(data);
-							    }
-
-	    					});
-	    			}
-	    		}
+				//不管兩個欄位都不是空值，都傳送值
+				get_info(); 				
 	    	});
 
 	    	//一但email輸入後即開始進行動態搜尋
 	    	$("#search_email").keyup(function(){
-	    		if ($("#search_email").val() != "") {
-	    			if ($("#search_username").val() != "") {
-	    				//兩個欄位都不是空值
-		    			$.ajax({
-		    				type:'POST',
-		    				url: '<?= base_url() ?>index.php/admin/setting/search_username_email',
-		    				data: 
-		    				{	
-		    					'n': $("#search_username").val(),
-		    					'm': $("#search_email").val()
+				//不管兩個欄位都不是空值，都傳送值
+				get_info();   					
+	    	});
 
-		    				},
-		    				dataType:"html",
-							success: function(data)
-								{
-							    	$('#tablee').html(data);
-							    }
-
-	    					});	
-	    			}else{
-	    				//帳號欄位是空值，email欄位不是空值
-		    			$.ajax({
-		    				type:'POST',
-		    				url: '<?= base_url() ?>index.php/admin/setting/search_email',
-		    				data: {'n': $("#search_email").val()},
-		    				dataType:"html",
-							success: function(data)
-								{
-							    	$('#tablee').html(data);
-							    }
-
-	    					});
-	    			}
-	    		}
-	    	});	    	
 
 		  });
 	 </script>
