@@ -88,19 +88,27 @@
 	    		}
 	    	});
 
-	    	//一但輸入後即開始進行動態搜尋
+	    	//一但帳號輸入後即開始進行動態搜尋
 	    	$("#search_username").keyup(function(){
 	    		if ($("#search_username").val() != "") {
-	    			$.ajax({
-	    				type:'POST',
-	    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
-	    				data: {'n': $("#search_username").val()},
-	    				dataType:"html",
-						success: function(data){
-						    $('#tablee').html(data);
-						    }
+	    			if ($("#search_email").val() != "") {
+	    				//兩個欄位都不是空值
 
-	    			});
+	    			}else{
+	    				//email欄位是空值，帳號欄位不是空值
+		    			$.ajax({
+		    				type:'POST',
+		    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
+		    				data: {'n': $("#search_username").val()},
+		    				dataType:"html",
+							success: function(data)
+								{
+							    	$('#tablee').html(data);
+							    }
+
+	    					});
+	    			}
+
 
 	    		}else{
 	    			if ($("#search_email").val() == "") {
@@ -109,7 +117,7 @@
 			    		$('.all_table').fadeIn();	    				
 	    			}
 	    		}
-	    	})
+	    	});
 
 		  });
 	 </script>
