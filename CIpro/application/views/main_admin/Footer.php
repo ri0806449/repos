@@ -102,6 +102,12 @@
 
 	    			});
 
+	    		}else{
+	    			if ($("#search_email").val() == "") {
+	    				//兩個欄位皆為空值，回復所有表格
+						$('.search_table').fadeOut();
+			    		$('.all_table').fadeIn();	    				
+	    			}
 	    		}
 	    	})
 
