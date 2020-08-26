@@ -108,8 +108,6 @@
 
 	    					});
 	    			}
-
-
 	    		}else{
 	    			if ($("#search_email").val() == "") {
 	    				//兩個欄位皆為空值，回復所有表格
@@ -118,6 +116,35 @@
 	    			}
 	    		}
 	    	});
+
+	    	//一但email輸入後即開始進行動態搜尋
+	    	$("#search_email").keyup(function(){
+	    		if ($("#search_email").val() != "") {
+	    			if ($("#search_username").val() != "") {
+	    				//兩個欄位都不是空值
+
+	    			}else{
+	    				//帳號欄位是空值，email欄位不是空值
+		    			$.ajax({
+		    				type:'POST',
+		    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
+		    				data: {'n': $("#search_email").val()},
+		    				dataType:"html",
+							success: function(data)
+								{
+							    	$('#tablee').html(data);
+							    }
+
+	    					});
+	    			}
+	    		}else{
+	    			if ($("#search_username").val() == "") {
+	    				//兩個欄位皆為空值，回復所有表格
+						$('.search_table').fadeOut();
+			    		$('.all_table').fadeIn();	    				
+	    			}
+	    		}
+	    	});	    	
 
 		  });
 	 </script>
