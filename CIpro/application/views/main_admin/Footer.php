@@ -93,7 +93,22 @@
 	    		if ($("#search_username").val() != "") {
 	    			if ($("#search_email").val() != "") {
 	    				//兩個欄位都不是空值
+		    			$.ajax({
+		    				type:'POST',
+		    				url: '<?= base_url() ?>index.php/admin/setting/search_username_email',
+		    				data: 
+		    				{	
+		    					'n': $("#search_username").val(),
+		    					'm': $("#search_email").val()
 
+		    				},
+		    				dataType:"html",
+							success: function(data)
+								{
+							    	$('#tablee').html(data);
+							    }
+
+	    					});	    				
 	    			}else{
 	    				//email欄位是空值，帳號欄位不是空值
 		    			$.ajax({
@@ -108,12 +123,6 @@
 
 	    					});
 	    			}
-	    		}else{
-	    			if ($("#search_email").val() == "") {
-	    				//兩個欄位皆為空值，回復所有表格
-						$('.search_table').fadeOut();
-			    		$('.all_table').fadeIn();	    				
-	    			}
 	    		}
 	    	});
 
@@ -122,12 +131,27 @@
 	    		if ($("#search_email").val() != "") {
 	    			if ($("#search_username").val() != "") {
 	    				//兩個欄位都不是空值
+		    			$.ajax({
+		    				type:'POST',
+		    				url: '<?= base_url() ?>index.php/admin/setting/search_username_email',
+		    				data: 
+		    				{	
+		    					'n': $("#search_username").val(),
+		    					'm': $("#search_email").val()
 
+		    				},
+		    				dataType:"html",
+							success: function(data)
+								{
+							    	$('#tablee').html(data);
+							    }
+
+	    					});	
 	    			}else{
 	    				//帳號欄位是空值，email欄位不是空值
 		    			$.ajax({
 		    				type:'POST',
-		    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
+		    				url: '<?= base_url() ?>index.php/admin/setting/search_email',
 		    				data: {'n': $("#search_email").val()},
 		    				dataType:"html",
 							success: function(data)
@@ -136,12 +160,6 @@
 							    }
 
 	    					});
-	    			}
-	    		}else{
-	    			if ($("#search_username").val() == "") {
-	    				//兩個欄位皆為空值，回復所有表格
-						$('.search_table').fadeOut();
-			    		$('.all_table').fadeIn();	    				
 	    			}
 	    		}
 	    	});	    	

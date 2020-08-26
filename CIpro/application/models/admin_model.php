@@ -196,6 +196,23 @@
 			return $query->result();
 		}
 
+		public function search_email($part_email)
+		{
+			$query = $this->db
+			->like('email', $part_email)
+			->get('user');
+			return $query->result();
+		}
+
+		public function search_username_email($part_email,$part_username)
+		{
+			$query = $this->db
+			->like('email', $part_email)
+			->like('username', $part_username)
+			->get('user');
+			return $query->result();
+		}
+
 		public function get_member_data()
 		{
 			//取得所有會員資料
