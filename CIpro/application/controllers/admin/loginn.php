@@ -69,6 +69,8 @@ class Loginn extends CI_Controller
 			//驗證沒過有分兩種，一種是沒有填但是本身已是登入狀態，一種是第一次進到登入頁面或帳密輸入錯誤，所以以下是這部分的判斷
 			//導向同一個網址，避免寫太多次一樣的程式碼
 			header('Location: http://[::1]/repos/CIpro/index.php/admin/loginn/index');
+			// redirect('')
+			exit;
 		} else {
 			//以下則是第一次輸入帳密或重新輸入帳密時要做出的反應
 			$data = array(
