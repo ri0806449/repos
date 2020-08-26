@@ -76,28 +76,32 @@
 	    	//點擊搜尋欄位時隱藏整個table
 	    	$('.search_stuff').click(function(){
 	    		$('.all_table').fadeOut();
-	    		$('#search_table').fadeIn();
+	    		$('.search_table').fadeIn();
 	    	});
 
 	    	//離開搜尋欄位時再次顯示整個table
 	    	$('.search_stuff').focusout(function(){
-	    		$('#search_table').fadeOut();
-	    		$('.all_table').fadeIn();
+	    		//當兩者都是空值時才回復所有表格
+	    		if ($('#search_username').val() == "" && $('#search_email').val() == "") {
+					$('.search_table').fadeOut();
+		    		$('.all_table').fadeIn();
+	    		}
 	    	});
 
 	    	//一但輸入後即開始進行動態搜尋
-	    	$("#search_stuff").keyup(function(){
-	    		if ($(this).val != "") {
+	    	$("#search_username").keyup(function(){
+	    		if ($("#search_username").val() != "") {
 	    			$.ajax({
 	    				type:'POST',
 	    				url: '<?= base_url() ?>index.php/admin/setting/search_username',
-	    				data: {'n': $(this).val},
+	    				data: {'n': $("#search_username").val()},
 	    				dataType:"html",
-	                    success: function (data) {
-                        //$('#search_table').html(data);
-                        console.log(data);
-                   		 }
-	    			})
+						success: function(data){
+						    $('#tablee').html(data);
+						    }
+
+	    			});
+
 	    		}
 	    	})
 

@@ -20,12 +20,36 @@
 				<a class="waves-effect waves-light btn-large" id="want_to_reset_password" href="http://[::1]/repos/CIpro/index.php/admin/setting/add_user"><i class="material-icons right">edit</i>新增會員資料</a>
 			</div>
 			<div class="row">
-				<div class="col s3 search_stuff">
-					搜尋帳號欄：<input type="text" name="search_stuff" placeholder="打點什麼吧～" id="search_stuff">
+				<div class="col s2 search_stuff">
+					搜尋帳號欄：<input type="text" name="search_content" placeholder="打點什麼吧～" id="search_username">
 				</div>
-			</div>						
+				<div class="col s2 search_stuff">
+					搜尋email欄：<input type="text" name="search_content" placeholder="打點什麼吧～" id="search_email">
+				</div>
+			</div>
+					
 		</div>
-			<div id="search_table"></div>
+					<!--以下以表格條列所有會員資料 -->
+			<div class="row search_table">
+				<div class="col s9 offset-s1">
+					<table class="centered highlight">
+						<thead>
+						<tr>
+							<th>帳號</th>
+							<th>email</th>
+							<th>性別</th>
+							<th>興趣</th>
+							<th>刪除</th>
+						</tr>
+						</thead>
+						<tbody id="tablee">
+						
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 
 
 			<!--以下以表格條列所有會員資料 -->
@@ -72,7 +96,7 @@
 							<td>
 								<div class="row">
 									<div class="col s12">
-										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $user[$key]['id']  ?>'><i class="material-icons right">delete</i>刪除</a>
+										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $res->id  ?>'><i class="material-icons right">delete</i>刪除</a>
 									</div>		
 								</div>								
 							</td>
@@ -87,7 +111,7 @@
 					<div><?php echo $links; ?></div>
 				</div>
 			</div>
-			<div class="row">
+ 			<div class="row">
 				<div class="col s12 center">
 					<a class="waves-effect waves-light btn-large user_logout" id="logout_admin" href="../loginn/logout_admin"><i class="material-icons right">cloud</i>登出</a>
 				</div>
