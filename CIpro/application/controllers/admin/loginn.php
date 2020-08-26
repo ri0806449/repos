@@ -49,6 +49,57 @@ class Loginn extends CI_Controller
 		}
 	}
 
+	//登入主頁的相關資訊
+	public function index2()
+	{	
+		if(isset($this->session->userdata['logged_in_admin'])){
+			$search_username = $this->input->get('search_username_try');
+			$search_email = $this->input->get('search_email_try');
+			if (isset($search_username) or isset($search_email)) {
+				//當兩個欄位其中一個有填寫資料時
+				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/search_username_try='.$search_username.'&search_email_try='.$search_email.'&action=';
+				$config['total_rows'] = $this->admin_model-> get_search_count($search_username, $search_email);
+				$config['per_page'] = 10;
+
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$member_data['links'] = $this->pagination->create_links();
+				$member_data['user_page'] = $this->admin_model->search_result($config["per_page"], $page, $search_username, $search_email);
+				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
+				$member_data['title'] = "CI實作會員系統後台";
+				//取得所有會員資料
+				$member_data['user'] = $this->admin_model->get_member_data();
+
+				$this->load->view('main_admin/header',$member_data);
+				$this->load->view('main_admin/content2',$member_data);
+				$this->load->view('main_admin/footer',$member_data);
+			}else{
+				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/index2';
+				$config['total_rows'] = $this->admin_model->get_count();
+				$config['per_page'] = 10;
+
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$member_data['links'] = $this->pagination->create_links();
+				$member_data['user_page'] = $this->admin_model->page_get_user($config["per_page"], $page);
+				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
+				$member_data['title'] = "CI實作會員系統後台";
+				//取得所有會員資料
+				$member_data['user'] = $this->admin_model->get_member_data();
+
+				$this->load->view('main_admin/header',$member_data);
+				$this->load->view('main_admin/content2',$member_data);
+				$this->load->view('main_admin/footer',$member_data);
+			}
+		}else{
+			$data['title'] = "CI實作會員系統後台"; 
+			$this->load->view('loginn_admin/header', $data);
+			$this->load->view('loginn_admin/content',$data);
+			$this->load->view('loginn_admin/footer',$data);
+		}
+	}
+
 
 	//自己設定的回調函數
 	public function username_check($str)//$str即寫入的值

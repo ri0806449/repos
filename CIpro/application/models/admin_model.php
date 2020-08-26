@@ -188,6 +188,21 @@
 			}
 		}
 
+		public function search_result($limit,$start, $search_username, $search_email)
+		{
+			$query = $this->db
+			->like('email', $search_email)
+			->like('username',$search_username)
+			->get('user', $limit, $start);
+			if ($query->num_rows() > 0) {
+				return $query->result();
+			}else{
+				return false;
+			}
+
+
+		}
+
 		public function search_username_email($part_email,$part_username)
 		{
 			$query = $this->db
@@ -221,6 +236,15 @@
 		public function get_count()
 		{
 			return $this->db->count_all("user");
+		}
+
+		//取得搜尋資料表總筆數，用於分頁
+		public function get_search_count($search_username, $search_email)
+		{
+			$this->db->like('email', $search_email);
+			$this->db->like('username', $search_username);
+			$this->db->from('user');
+			return $this->db->count_all_results();
 		}
 
 		//取得資料表特定筆數的資料，用於分頁
