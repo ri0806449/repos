@@ -74,42 +74,49 @@
 						</tr>
 						</thead>
 						<tbody>
-						<?php foreach ($user_page as $res):?>
-						<tr>
-							<td>
-								<span class="edit"><?= $res->username;  ?></span>
-								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'username' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->username ?>'>
-							</td>
-							<td>
-								<span class="edit"><?= $res->email;  ?></span>
-								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'email' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->email ?>'>
-							</td>
-							<td>
-								<span class="edit">
-								<?php 
-								if ($res->gender == 0){
-									echo "女孩紙";
-									}
-								elseif($res->gender == 1){
-									echo "男孩紙";
-									}	
-								?>
-								</span>
-								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'gender' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->gender ?>'>
-							</td>
-							<td>
-								<span class="edit"><?= $res->hobby;  ?></span>
-								<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'hobby' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->hobby ?>'>
-							</td>
-							<td>
-								<div class="row">
-									<div class="col s12">
-										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $res->id  ?>'><i class="material-icons right">delete</i>刪除</a>
-									</div>		
-								</div>								
-							</td>
-						</tr>
-						<?php endforeach; ?>
+						<?php if ($user_page != FALSE): ?>
+							<?php foreach ($user_page as $res):?>
+							<tr>
+								<td>
+									<span class="edit"><?= $res->username;  ?></span>
+									<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'username' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->username ?>'>
+								</td>
+								<td>
+									<span class="edit"><?= $res->email;  ?></span>
+									<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'email' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->email ?>'>
+								</td>
+								<td>
+									<span class="edit">
+									<?php 
+									if ($res->gender == 0){
+										echo "女孩紙";
+										}
+									elseif($res->gender == 1){
+										echo "男孩紙";
+										}	
+									?>
+									</span>
+									<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'gender' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->gender ?>'>
+								</td>
+								<td>
+									<span class="edit"><?= $res->hobby;  ?></span>
+									<input type="text" class="txtedit" data-id= '<?= $res->id  ?>' data-field= 'hobby' id= 'nametxt_<?= $res->id ?>' value= '<?= $res->hobby ?>'>
+								</td>
+								<td>
+									<div class="row">
+										<div class="col s12">
+											<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $res->id  ?>'><i class="material-icons right">delete</i>刪除</a>
+										</div>		
+									</div>								
+								</td>
+							</tr>
+							<?php endforeach; ?>
+						<?php elseif ($user_page == FALSE): ?>
+							<tr>
+								<td><p>查無結果</p></td>
+							</tr>
+														
+						<?php endif ?>
 						</tbody>
 					</table>
 				</div>
