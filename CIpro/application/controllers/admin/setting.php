@@ -100,7 +100,8 @@ class Setting extends CI_Controller
 		$part_username = $this->input->post('n');
 		//傳到model進行搜尋的動作
 		$result = $this->admin_model->search_username_email($part_email,$part_username);
-		foreach($result as $row)
+
+/*		foreach($result as $row)
 		{
 			echo "<tr>";
 			echo "<td>".$row->username."</td>";
@@ -115,7 +116,17 @@ class Setting extends CI_Controller
 		  	echo "</div>";
 			echo "</td>";
 			echo "</tr>";	
-		}
+		}*/
+		//var_dump($part_username);
+		//var_dump($result);
+		//變字串了喔
+		$result = json_encode(array("search"=>$result));
+		//變物件了喔
+		var_dump($result);
+		$result = json_decode($result);
+		echo gettype($result);
+				
+		return $result;
 	}
 	
 

@@ -42,9 +42,16 @@
 							<th>刪除</th>
 						</tr>
 						</thead>
-						<tbody id="tablee">
-						
-
+						<tbody>
+							<tr id="tablee">
+							<td>
+								<div class="row">
+									<div class="col s12">
+										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $res->id  ?>'><i class="material-icons right">delete</i>刪除</a>
+									</div>		
+								</div>								
+							</td>								
+							</tr>
 						</tbody>
 					</table>
 				</div>

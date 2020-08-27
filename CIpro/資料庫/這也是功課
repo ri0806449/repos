@@ -5,3 +5,9 @@
 var result = {success: true, data: [], html: "<td></td>"};
 
 $('#block').html(result.html);
+
+
+postman
+session 要載套件 ins.......tor
+
+檢查 network xhr preview或response 看輸出資料

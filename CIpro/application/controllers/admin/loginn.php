@@ -64,6 +64,7 @@ class Loginn extends CI_Controller
 
 				//取得最後區段
 				$a = $_SERVER['QUERY_STRING'];
+				var_dump($a);
 				//擷取數字
 				$number_page = filter_var($a, FILTER_SANITIZE_NUMBER_INT);
 

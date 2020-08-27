@@ -91,6 +91,7 @@
 	    	//不管兩個欄位都不是空值，都傳送值的函式
 	    	function get_info()
 	    	{
+
     			$.ajax({
     				type:'POST',
     				url: '<?= base_url() ?>index.php/admin/setting/search_username_email',
@@ -101,13 +102,17 @@
 
     				},
     				dataType:"html",
-					success: function(data)
-						{
-					    	$('#tablee').html(data);
-					    }
+					}).done(function(data){
+	                   //var result = JSON.parse(data);
+	                   console.log(result);
+	                   console.log('你看不到我你看不到我');
 
-					});	 
-	    	}
+
+                }).fail(function(jqXHR, textStatus, errorThrown){
+                  	//alert("有錯誤產生，請看 console.log");
+			        console.log(jqXHR.responseText);
+                });	 
+	    	};
 
 	    	//一但帳號輸入後即開始進行動態搜尋
 	    	$("#search_username").keyup(function(){
