@@ -1,6 +1,6 @@
-1.index2 form get pagenation
+1.index2 form get pagenation 完成
 2.ajax搜尋改用一個function  完成
-3.echo td 重複利用 array？？
+3.echo td 重複利用 array？？ 
 
 var result = {success: true, data: [], html: "<td></td>"};
 

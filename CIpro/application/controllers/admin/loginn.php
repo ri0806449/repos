@@ -57,12 +57,18 @@ class Loginn extends CI_Controller
 			$search_email = $this->input->get('search_email_try');
 			if (isset($search_username) or isset($search_email)) {
 				//當兩個欄位其中一個有填寫資料時
-				$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/search_username_try='.$search_username.'&search_email_try='.$search_email.'&action=';
+				$config['base_url'] = 'index2?search_username_try='.$search_username.'&search_email_try='.$search_email.'&action=';
 				$config['total_rows'] = $this->admin_model-> get_search_count($search_username, $search_email);
 				$config['per_page'] = 10;
+				$config['page_query_string'] = TRUE;
+
+				//取得最後區段
+				$a = $_SERVER['QUERY_STRING'];
+				//擷取數字
+				$number_page = filter_var($a, FILTER_SANITIZE_NUMBER_INT);
 
 				$this->pagination->initialize($config);
-				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$page = ($number_page)? $number_page : 0;
 				$member_data['links'] = $this->pagination->create_links();
 				$member_data['user_page'] = $this->admin_model->search_result($config["per_page"], $page, $search_username, $search_email);
 				$member_data['admin'] = $this->session->userdata['logged_in_admin'];
