@@ -117,6 +117,9 @@ class Setting extends CI_Controller
 			echo "</td>";
 			echo "</tr>";	
 		}*/
+
+		
+		
 		//var_dump($part_username);
 		//var_dump($result);
 		//變字串了喔

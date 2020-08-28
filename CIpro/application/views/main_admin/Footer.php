@@ -105,12 +105,15 @@
     				},
     				//dataType:'json',
 					}).done(function(data){
+						console.log(data.search);
+						console.log(data['search']);
+
+						$('#tablee').empty();
 	                   //var result = JSON.parse(data);
-	                   console.log(data['search']);
-	                   //console.log(result);
 	                   for (var i = 0; i < data['search'].length; i++) {
+	                   		
 							$('#tablee').append('<tr>');
-		                   	$('#tablee').append('<td>' + data['search'][i]['username'] + '</td>');
+		                   	$('#tablee').append('<td>' + data['search'][i]['username']+ '</td>');
 		                   	$('#tablee').append('<td>' + data['search'][i]['email'] + '</td>');
 		                   	$('#tablee').append('<td>' + data['search'][i]['gender'] + '</td>');
 		                   	$('#tablee').append('<td>' + data['search'][i]['hobby'] + '</td>');
