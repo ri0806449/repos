@@ -88,6 +88,8 @@
 	    		}
 	    	});
 
+	    	
+
 	    	//不管兩個欄位都不是空值，都傳送值的函式
 	    	function get_info()
 	    	{
@@ -101,16 +103,56 @@
     					'm': $("#search_email").val()
 
     				},
-    				dataType:'json',
+    				//dataType:'json',
 					}).done(function(data){
 	                   //var result = JSON.parse(data);
-	                   console.log(data[0]['id']);
-
-
-
-                }).fail(function(jqXHR, textStatus, errorThrown){
+	                   /*for (var i = 0; i < 5; i++) {
+	                   	$('#tablee').append('<tr>');
+	                   	$('#tablee').append('<td>' + "1" + '</td>');
+	                   	$('#tablee').append('<td>' + "2" + '</td>');
+	                   	$('#tablee').append('<td>' + data['search'][0]['username'] + '</td>');
+	                   	$('#tablee').append('<td>' + "3" + '</td>');
+	                   	$('#tablee').append('<td>' + "4" + '</td>');
+	                   	$('#tablee').append('</tr>');
+	                   }*/
+	                   
+	                   console.log(data['search']);
+	                   //console.log(result);
+	                   for (var i = 0; i < data['search'].length; i++) {
+	                   		/*html.push('<td>' + data['search'][i]['username'] + '</td>');
+	                   		$('#tablee').append(html.join());
+*/							$('#tablee').append('<tr>');
+		                   	$('#tablee').append('<td>' + data['search'][i]['username'] + '</td>');
+		                   	$('#tablee').append('<td>' + data['search'][i]['email'] + '</td>');
+		                   	$('#tablee').append('<td>' + data['search'][i]['gender'] + '</td>');
+		                   	$('#tablee').append('<td>' + data['search'][i]['hobby'] + '</td>');
+		                   	$('#tablee').append('</tr>');
+	                   }
+	                   /*$.each(data,function(index, object)
+	                   {
+	                   	$('#tablee').append('<td>' + object + '</td>');
+	                   })
+*/	                   
+						
+                }).fail(function(jqXHR, exception){
                   	//alert("有錯誤產生，請看 console.log");
-			        console.log(jqXHR.responseText);
+					var msg = '';
+					        if (jqXHR.status === 0) {
+					            msg = 'Not connect.\n Verify Network.';
+					        } else if (jqXHR.status == 404) {
+					            msg = 'Requested page not found. [404]';
+					        } else if (jqXHR.status == 500) {
+					            msg = 'Internal Server Error [500].';
+					        } else if (exception === 'parsererror') {
+					            msg = 'Requested JSON parse failed.';
+					        } else if (exception === 'timeout') {
+					            msg = 'Time out error.';
+					        } else if (exception === 'abort') {
+					            msg = 'Ajax request aborted.';
+					        } else {
+					            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+					        }		
+					        alert(msg);	        
                 });	 
 	    	};
 

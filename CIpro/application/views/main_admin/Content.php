@@ -35,23 +35,21 @@
 					<table class="centered highlight">
 						<thead>
 						<tr>
+							<!-- <th>刪除</th> -->
 							<th>帳號</th>
 							<th>email</th>
 							<th>性別</th>
 							<th>興趣</th>
-							<th>刪除</th>
 						</tr>
 						</thead>
-						<tbody>
-							<tr id="tablee">
-							<td>
+						<tbody class="center" id="tablee">
+							<!-- <td>
 								<div class="row">
 									<div class="col s12">
-										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= '<?= $res->id  ?>'><i class="material-icons right">delete</i>刪除</a>
+										<a class="waves-effect waves-light btn-large delete_user red lighten-3" data-id= ''><i class="material-icons right">delete</i>刪除</a>
 									</div>		
 								</div>								
-							</td>								
-							</tr>
+							</td>	 -->							
 						</tbody>
 					</table>
 				</div>

@@ -120,14 +120,17 @@ class Setting extends CI_Controller
 		//var_dump($part_username);
 		//var_dump($result);
 		//變字串了喔
-		//$result = json_encode(array("search"=>$result));
+		$this->output
+    	->set_content_type('application/json')
+    	->set_output(json_encode(array('search'=>$result)));
+		//$result = json_encode(array('search'=>$result));
 		//變物件了喔
 		//var_dump($result);
 		//$result = json_decode($result);
-		echo gettype($result);
-		print_r($result);
+		//echo gettype($result);
+		//print_r($result);
 				
-		return $result;
+		//return $result;
 	}
 	
 
