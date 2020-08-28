@@ -101,11 +101,11 @@
     					'm': $("#search_email").val()
 
     				},
-    				dataType:"html",
+    				dataType:'json',
 					}).done(function(data){
 	                   //var result = JSON.parse(data);
-	                   console.log(result);
-	                   console.log('你看不到我你看不到我');
+	                   console.log(data[0]['id']);
+
 
 
                 }).fail(function(jqXHR, textStatus, errorThrown){

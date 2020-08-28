@@ -205,7 +205,6 @@
 
 		public function search_username_email($part_email,$part_username)
 		{
-			var_dump($part_username);
 			$query = $this->db
 			->like('email', $part_email)
 			->like('username', $part_username)
