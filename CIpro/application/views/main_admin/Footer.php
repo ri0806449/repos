@@ -106,22 +106,10 @@
     				//dataType:'json',
 					}).done(function(data){
 	                   //var result = JSON.parse(data);
-	                   /*for (var i = 0; i < 5; i++) {
-	                   	$('#tablee').append('<tr>');
-	                   	$('#tablee').append('<td>' + "1" + '</td>');
-	                   	$('#tablee').append('<td>' + "2" + '</td>');
-	                   	$('#tablee').append('<td>' + data['search'][0]['username'] + '</td>');
-	                   	$('#tablee').append('<td>' + "3" + '</td>');
-	                   	$('#tablee').append('<td>' + "4" + '</td>');
-	                   	$('#tablee').append('</tr>');
-	                   }*/
-	                   
 	                   console.log(data['search']);
 	                   //console.log(result);
 	                   for (var i = 0; i < data['search'].length; i++) {
-	                   		/*html.push('<td>' + data['search'][i]['username'] + '</td>');
-	                   		$('#tablee').append(html.join());
-*/							$('#tablee').append('<tr>');
+							$('#tablee').append('<tr>');
 		                   	$('#tablee').append('<td>' + data['search'][i]['username'] + '</td>');
 		                   	$('#tablee').append('<td>' + data['search'][i]['email'] + '</td>');
 		                   	$('#tablee').append('<td>' + data['search'][i]['gender'] + '</td>');
