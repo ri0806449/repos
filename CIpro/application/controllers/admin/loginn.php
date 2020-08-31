@@ -20,6 +20,7 @@ class Loginn extends CI_Controller
 		$this->load->library('pagination');
 	}
 
+
 	//登入主頁的相關資訊
 	public function index()
 	{	
