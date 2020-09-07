@@ -21,6 +21,60 @@ class Loginn extends CI_Controller
 	}
 
 
+	 
+
+	//確定function裡面放運算子的用意，其實主要是提前指派值給變數（自己的理解）
+	public function aa($time = 33120)
+	{	
+		//$time = 20;
+		$time = $time + 80;
+		echo $time;
+	}
+
+	//試試htmlspecialchars_decode
+	public function ee()
+	{
+		$str = "<p>this -&gt; &quot;</p>\n";
+
+		echo htmlspecialchars_decode($str);
+
+		// note that here the quotes aren't converted
+		echo htmlspecialchars_decode($str, ENT_NOQUOTES);
+	}
+
+	//試試array_slice
+	public function ss()
+	{
+		$foo = ['pie','pie1','pie2','pie3','pie4'];
+		print_r(array_slice($foo, 1, 5));
+	}
+
+	//對於驚嘆號的運用，還是感到滿滿的驚嘆號（還有問號）
+	public function tt()
+	{
+
+		$a = 8;
+		$b = 4;
+		if (!$a = $b+5) {
+			echo "Yes";
+		}else{
+			echo "No";
+		}
+		
+	}
+
+	//只是試試看
+	public function ww()
+	{
+		$b = $this->admin_model->try("ccwsdu");
+		var_dump($b);		
+	}
+
+	function bar($arg = '')
+	{
+	    echo "In bar(); argument was $arg.<br />\n";
+	}	
+
 	//登入主頁的相關資訊
 	public function index()
 	{	
