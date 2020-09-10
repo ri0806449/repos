@@ -23,12 +23,29 @@ class Loginn extends CI_Controller
 
 	 
 
-	//確定function裡面放運算子的用意，其實主要是提前指派值給變數（自己的理解）
+	//確定function裡面放運算子的用意，即預設值
 	public function aa($time = 33120)
 	{	
 		//$time = 20;
 		$time = $time + 80;
 		echo $time;
+	}
+
+	//strtotime感覺是好東西
+	public function ff()
+	{
+		$target_time = strtotime('-5 minutes -180 seconds');
+		$minus = (strtotime('now') - $target_time)/60;
+		//即顯示設定的時間差（分鐘）
+		echo $minus;
+	}
+
+	//str_replace試一下
+	public function pp()
+	{
+		$foo = 'fucking good!';
+		$foo_clean = str_replace('u', 'x', $foo);
+		echo $foo_clean;
 	}
 
 	//試試htmlspecialchars_decode
