@@ -22,11 +22,9 @@
 		//試試看
 		public function try($cache_name, $time=21600, $function_name=null, $var_arr = array())
 		{
-			if(empty($cache_name)){
-            return array();
-        	}else{
-        		return $cache_name;
-        	}
+			
+			return $time;
+			//echo $function_name;
 		}
 		//用帳號密碼讀取資料
 		public function login($data)

@@ -21,7 +21,16 @@ class Loginn extends CI_Controller
 	}
 
 
-	 
+	//確定function裡面放運算子的用意，即預設值
+	public function au()
+	{	
+		$cache_name = "afu";
+		$function_name = "fun";
+
+		$b = $this->admin_model->try($cache_name,$function_name);
+		var_dump($b);
+
+	} 
 
 	//確定function裡面放運算子的用意，即預設值
 	public function aa($time = 33120)
@@ -29,6 +38,7 @@ class Loginn extends CI_Controller
 		//$time = 20;
 		$time = $time + 80;
 		echo $time;
+
 	}
 
 	//strtotime感覺是好東西
