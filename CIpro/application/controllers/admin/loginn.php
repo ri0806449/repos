@@ -7,7 +7,7 @@ class Loginn extends CI_Controller
 	{
 		parent::__construct();
 		//載入表單輔助函式
-		$this->load->helper('form','url');
+		$this->load->helper(array('form','url', 'file'));
 		//載入表單驗證輔助函式
 		$this->load->library('form_validation');
 		//載入session輔助函式
@@ -19,6 +19,135 @@ class Loginn extends CI_Controller
 		//載入分頁資源
 		$this->load->library('pagination');
 	}
+
+	//CSV檔案轉陣列
+	public function csv_turn()
+	{
+		$filename = __dir__ . '/../../libraries/lottery.csv';
+
+		/*$fp = fopen($filename, 'r');
+		$data = fgetcsv($fp, 1000, ",");
+		$data = mb_convert_encoding($data, "UTF-8", "GBK");
+		fclose($fp);*/
+
+		//$handle = fopen($filename, 'r');
+		//$contents = fread($handle, filesize($filename));
+		$csv = array_map('str_getcsv', file($filename));
+		//$csv = mb_convert_encoding($csv, "UTF-8", "GBK");
+		//fclose($handle);
+		//$csv = array_map('str_getcsv', file('libraries/lion.csv'));
+/*		$fp = fopen('lion.csv', 'r');
+		while (($data = fgetcsv($fp, 1000, ",")) !==FALSE) {
+			$mmid = $data[0];
+			$response = $data[1];
+			$contentt = $data[2];
+		};
+		var_dump($data);*/		
+		if ( isset($csv) and ! empty($csv) ) {
+			echo '成功'. '<br>';
+			foreach ($csv as $key => $value) {
+				$num = $key+1;
+				if($num >= 2){
+					$num = '<br>' . $num;
+				}
+				echo $num . " . " . '<br>' . "mmid：" . $value[0] . '<br>';
+				echo "暱稱：" . $value[1] . '<br>';
+				echo "訊息：" . $value[2] . '<br>';
+			}
+		}else{
+			echo '係敗啊';
+		}
+	}
+
+	//寄送簡訊
+    public function send_sms() {
+
+        //$post = $this->input->post();
+
+        $failure_mmid = [];
+        $success_mmid = [];
+    
+        foreach ($post as $k => $v) {
+            if (!isset($v['mmid']) || empty($v['mmid'])) {
+                $this->out_put('no mmid');
+                return;
+            }
+
+            $var = $this->mb_member->find_member_phone($v['mmid']);
+            $v['mobile'] = $var['mobile'];
+            if (!isset($v['mobile']) || empty($v['mobile'])) {
+                $this->out_put('no mobile');
+                return;
+            }
+            if (strlen($v['mobile']) != 10) {
+                $this->out_put('mobile format error(length not equal 10)');
+                return;
+            }
+            if (!preg_match("/(09)+[\\d]{8}/", $v['mobile'])) {
+                $this->out_put('mobile format error');
+                return;
+            }
+            if (!isset($v['content']) || empty($v['content'])) {
+                $this->out_put('no content');
+                return;
+            }
+
+            $mmid = $v['mmid'];
+            $mobile = $v['mobile'];
+            $content = $v['content'];
+            $oid = 0;
+            $type = 0;
+
+            if (isset($v['oid']) && !empty($v['oid'])) {
+                $oid = $v['oid'];
+            }
+            if (isset($v['type']) && !empty($v['type'])) {
+                $type = $v['type'];
+            }
+
+            $insert_data = array(
+                'mmid' => $mmid,
+                'oid' => $oid,
+                'type' => $type,
+                'mobile' => $mobile,
+                'content' => $this->convert_to_big5($content),
+                'status' => 0,
+                'create_date' => date("Y-m-d H:i:s"),
+                'sms_id' => 0,
+                'error_code' => '',
+                'info_data' => '',
+                'response_status' => '',
+                'response_data' => '',
+                'send_date' => '0000-00-00 00:00:00'
+            );
+
+            if ($this->tbl_smsqueue_log->insert_data($insert_data)) {
+                array_push($success_mmid, $v['mmid']);
+                //$this->out_put(null, 'send success');
+            } else {
+                array_push($failure_mmid, $v['mmid']);
+                //$this->out_put('send error,insert fail');
+            }
+        }
+        echo "成功傳送帳號包含：";
+        print_r($success_mmid);
+        echo "失敗傳送帳號包含：";
+        print_r($failure_mmid);
+
+
+    }
+
+	public function taggg()
+	{
+		$content = "<a href='https://www.google.com.tw'><拿的到嗎～～></a><a href='https://www.google.com.tw'>拿的到嗎～～</a>";
+		$pattern = "/<[^<>]*>/";
+		preg_match_all($pattern, $content, $matches);
+		$content_get_tags =  implode(" ", $matches[0]);
+		$content_without_tags = strip_tags($content);
+		$new_content    = $content_get_tags . $content_without_tags;
+		var_dump($new_content);		
+	}
+
 
 
 	//確定function裡面放運算子的用意，即預設值
@@ -41,13 +170,36 @@ class Loginn extends CI_Controller
 
 	}
 
+   
 	//strtotime感覺是好東西
 	public function ff()
 	{
-		$target_time = strtotime('-5 minutes -180 seconds');
+/*		$target_time = strtotime('-5 minutes -180 seconds');
 		$minus = (strtotime('now') - $target_time)/60;
 		//即顯示設定的時間差（分鐘）
-		echo $minus;
+		echo $minus;*/
+        //明天午夜12點
+        $tomorrow = strtotime('tomorrow', time());
+        //後天午夜12點
+        $after_tomorrow = strtotime('+1 day', $tomorrow);
+        //昨天午夜12點
+        $yesterday = strtotime('yesterday', time());
+        //前天午夜12點
+        $befor_yesterday = strtotime('-1 day', $yesterday); 
+        $c_time = '今天 22:00';
+		echo (strpos($c_time, '2')) ? 'stream-time-today':'';
+        //echo $today_midnight = date('Y/m/d H:i:s', strtotime('midnight', time()));
+
+		$time_day = '2020-12-31 20:20';
+		$c = strtotime('tomorrow', strtotime($time_day));
+		$a = date('d', strtotime($time_day));
+		$b = date('Y/m/d H:i', $c);
+		//echo $b;
+		//echo $a;
+		$minus_day =  date('d') - $a;
+		//echo $minus_day;
+		/*echo cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+		echo date('Y-m-d');*/
 	}
 
 	//str_replace試一下
@@ -57,6 +209,8 @@ class Loginn extends CI_Controller
 		$foo_clean = str_replace('u', 'x', $foo);
 		echo $foo_clean;
 	}
+
+
 
 	//試試htmlspecialchars_decode
 	public function ee()
@@ -106,7 +260,7 @@ class Loginn extends CI_Controller
 	public function index()
 	{	
 		if(isset($this->session->userdata['logged_in_admin'])){
-			$config['base_url'] = 'http://[::1]/repos/CIpro/index.php/admin/loginn/index';
+			$config['base_url'] = 'http://localhost/repos/CIpro/index.php/admin/loginn/index';
 			$config['total_rows'] = $this->admin_model->get_count();
 			$config['per_page'] = 10;
 

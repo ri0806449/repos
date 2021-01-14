@@ -117,7 +117,7 @@
 			if ($query->num_rows() > 0)
 			{
 			   $row = $query->row_array();
-			   //將過期時間轉成timestamp形式
+			   //將過期的token時間間轉成timestamp形式
 			   $etime = strtotime($row['token_expire_time']);
 			   if (time() > $etime) {
 			   	//已過期，刪除token
@@ -227,6 +227,83 @@
 			return $row;
 		}
 
+
+    public function send_sms() {
+
+        //$post = $this->input->post();
+
+        $failure_mmid = [];
+        $success_mmid = [];
+    
+        foreach ($post as $k => $v) {
+            if (!isset($v['mmid']) || empty($v['mmid'])) {
+                $this->out_put('no mmid');
+                return;
+            }
+
+            $var = $this->mb_member->find_member_phone($v['mmid']);
+            $v['mobile'] = $var['mobile'];
+            if (!isset($v['mobile']) || empty($v['mobile'])) {
+                $this->out_put('no mobile');
+                return;
+            }
+            if (strlen($v['mobile']) != 10) {
+                $this->out_put('mobile format error(length not equal 10)');
+                return;
+            }
+            if (!preg_match("/(09)+[\\d]{8}/", $v['mobile'])) {
+                $this->out_put('mobile format error');
+                return;
+            }
+            if (!isset($v['content']) || empty($v['content'])) {
+                $this->out_put('no content');
+                return;
+            }
+
+            $mmid = $v['mmid'];
+            $mobile = $v['mobile'];
+            $content = $v['content'];
+            $oid = 0;
+            $type = 0;
+
+            if (isset($v['oid']) && !empty($v['oid'])) {
+                $oid = $v['oid'];
+            }
+            if (isset($v['type']) && !empty($v['type'])) {
+                $type = $v['type'];
+            }
+
+            $insert_data = array(
+                'mmid' => $mmid,
+                'oid' => $oid,
+                'type' => $type,
+                'mobile' => $mobile,
+                'content' => $this->convert_to_big5($content),
+                'status' => 0,
+                'create_date' => date("Y-m-d H:i:s"),
+                'sms_id' => 0,
+                'error_code' => '',
+                'info_data' => '',
+                'response_status' => '',
+                'response_data' => '',
+                'send_date' => '0000-00-00 00:00:00'
+            );
+
+            if ($this->tbl_smsqueue_log->insert_data($insert_data)) {
+                array_push($success_mmid, $v['mmid']);
+                //$this->out_put(null, 'send success');
+            } else {
+                array_push($failure_mmid, $v['mmid']);
+                //$this->out_put('send error,insert fail');
+            }
+        }
+        echo "成功傳送帳號包含：";
+        print_r($success_mmid);
+        echo "失敗傳送帳號包含：";
+        print_r($failure_mmid);
+
+
+    }
 
 		//刪除token值
 		public function delete_token($data)
