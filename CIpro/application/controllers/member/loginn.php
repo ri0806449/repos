@@ -80,11 +80,11 @@ class Loginn extends CI_Controller
 				$result = $this->member_model->read_user_information($username);
 			if ($result != false) {
 				$session_data = array(
-									'id' => $result[0]->id,
+									'id'       => $result[0]->id,
 									'username' => $result[0]->username,
-									'email' => $result[0]->email,
-									'gender' => $result[0]->gender,
-									'hobby' => $result[0]->hobby
+									'email'    => $result[0]->email,
+									'gender'   => $result[0]->gender,
+									'hobby'    => $result[0]->hobby
 									);
 				//將撈出來的使用者相關資料存進session，並導入主頁
 				$this->session->set_userdata('logged_in', $session_data);
